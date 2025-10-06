@@ -1,2 +1,14 @@
 @import "tailwindcss";
 @plugin "daisyui" {}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --mainColor: #89216b;
+  --whiteColor: #ffffff;
+  --titleColor: #555555;
+  --labelColor: #333333;
+}
