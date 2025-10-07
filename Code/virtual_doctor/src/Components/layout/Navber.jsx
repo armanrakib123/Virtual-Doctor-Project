@@ -259,7 +259,7 @@ const Navbar = () => {
       <div className="navbar-end gap-2">
         <div className='justify-center items-center flex'>
           <div className="dropdown dropdown-hover dropdown-center">
-            <div tabIndex={0}  className=""><GrLanguage className='w-5 h-5' /></div>
+            <div tabIndex={0} className=""><GrLanguage className='w-5 h-5' /></div>
             <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-20 p-2 shadow-sm">
               <li><a>English</a></li>
               <li><a>বাংলা</a></li>
@@ -274,7 +274,16 @@ const Navbar = () => {
         </label>
 
         <div className="hidden sm:flex gap-1">
-          <Link href="/login" className="btn btn-ghost">Log In</Link>
+          
+          <div className="dropdown dropdown-center">
+            <div tabIndex={0} className=""><Link href="/login" className="btn btn-ghost">Log In</Link></div>
+            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-20 p-2 shadow-sm">
+              <Link className='pb-4' href={"/login"}><button className="btn btn-sm btn-soft btn-info text-black">Doctor</button></Link>
+              <Link href={"/login"}><button className="btn btn-sm btn-soft btn-info text-black">Patient</button></Link>
+              
+            </ul>
+          </div>
+
           <Link href="/register" className="btn text-[15px] font-bold rounded-4xl px-8 bg-gradient-to-br from-green-300 to-blue-600 hover:bg-gradient-to-bl">Get Started</Link>
         </div>
       </div>
