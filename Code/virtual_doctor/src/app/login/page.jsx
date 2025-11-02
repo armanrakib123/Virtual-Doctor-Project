@@ -6,6 +6,40 @@ import clsx from "clsx";
 import Link from "next/link";
 
 export default function Page() {
+
+////////////////// { register API } //////////////////////////
+
+
+  const handle_register_submit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const data = await res.json();
+    if (res.ok) { 
+      alert("User registered successfully!");
+      form.reset();
+    } else {
+      alert(data.error);
+    }
+  };
+
+
+////////////////// { login API } //////////////////////////
+
+
+
+
+//////////////////////////////////////////////////////////
+
   const [animation, setAnimation] = useState("");
 
   const handleSignUpClick = () => {
@@ -45,12 +79,13 @@ export default function Page() {
                   [styles.animatedSignUpOnSignUpCard]: animation == "animated-signup",
                 })}>
 
-                <form action="#">
+                <form onSubmit={handle_register_submit} action="#">
                   <h2 className={`${styles.cardTitle}`}>sign up</h2>
 
                   <div className={`${styles.formGroup}`}>
                     <input
                       type="text"
+                      name="name"
                       required
                       className={`${styles.inputFields}`}
                     />
@@ -60,7 +95,8 @@ export default function Page() {
 
                   <div className={`${styles.formGroup}`}>
                     <input
-                      type="email"
+                      type="text"
+                      name="email"
                       required
                       className={`${styles.inputFields}`}
                     />
@@ -71,6 +107,7 @@ export default function Page() {
                   <div className={`${styles.formGroup}`}>
                     <input
                       type="password"
+                      name="password"
                       required
                       className={`${styles.inputFields}`}
                     />
@@ -79,23 +116,6 @@ export default function Page() {
                   </div>
 
 
-
-
-
-
-
-
-                  {/* <div className={`${styles.formGroup}`}>
-                                    <input
-                                        type="password"
-                                        required
-                                        className={`${styles.inputFields}`}
-                                    />
-
-                                    <label className={`${styles.fieldLabel}`}>
-                                        confirm password
-                                    </label>
-                                </div> */}
 
 
 

@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation";
 import Footer from "./layout/Footer";
 import Navbar from "./layout/Navber";
+import Loading from "./LayoutLoading/Loading";
 
 
 
@@ -15,6 +16,8 @@ export default function ClientLayout({ children }) {
       {!hide && <Navbar />}
       {children}
       {!hide && <Footer />}
+      <Loading>
+      </Loading>
     </>
   );
 }
