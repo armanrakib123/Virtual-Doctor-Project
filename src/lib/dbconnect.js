@@ -1,5 +1,5 @@
 import { MongoClient, ServerApiVersion } from "mongodb"
-const uri = process.env.MONGODB_URI
+const uri = process.env.NEXT_PUBLIC_MONGODB_URI
 
 export const collectionNameObj = {
     All_Doctor_Collection:"All_Doctor",
@@ -8,6 +8,7 @@ export const collectionNameObj = {
     VD_Patient_Auth:"VD_Patient_Auth",
     VD_Appointment_Booking:"VD_Appointment_Booking",
     Patient_Profile:"Patient_Profile",
+    Live_chat:"Live_chat"
 }
 
 export default function dbconnect(collectionName) {

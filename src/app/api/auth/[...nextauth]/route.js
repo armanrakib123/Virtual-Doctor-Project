@@ -304,7 +304,7 @@ import { sendWelcomeEmail } from "@/lib/sendEmail";
 
 export const authOptions = {
   pages: {
-    signIn: "/login",
+    signIn: "/Login/doctor",
   },
 
   secret: process.env.NEXTAUTH_SECRET,
@@ -343,7 +343,7 @@ export const authOptions = {
 
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.Google_CLIENT_SECRET,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
 

@@ -1,8 +1,9 @@
+import dbconnect, { collectionNameObj } from "@/lib/dbconnect";
 import Chat from "@/models/Chat";
-import connectDB from "@/lib/connectDB";
+
 
 export async function POST(req) {
-  await connectDB();
+  await dbconnect(collectionNameObj.Live_chat);
 
   const body = await req.json();
   const { chatId, message } = body;
