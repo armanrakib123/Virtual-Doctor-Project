@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import MultiDirectionHero from "./MultiDirectionHero";
 import { MultiDirectionSlide } from "./MultiDirectionSlide";
 import ServiceCard from "./ServiceCard";
+import Link from "next/link";
 
 
 
@@ -21,7 +22,7 @@ export default function HomePage() {
           <MultiDirectionHero
             bgImage1="/Assets/A.jpg"
           />
-          
+
         </main>
       </header>
 
@@ -82,7 +83,8 @@ export default function HomePage() {
 
             </div>
             <div className="pt-8">
-              <h2 className="btn text-white font-bold bg-cyan-800 w-40 flex justify-center items-center h-12" data-aos="fade-up">Our Services</h2>
+             <h2 className="btn text-white font-bold bg-cyan-800 w-40 flex justify-center items-center h-12" data-aos="fade-up">Our Services</h2>
+  
             </div>
           </div>
 

@@ -3,39 +3,41 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { GrLanguage } from "react-icons/gr";
+import { signOut, useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 /////////////////////////////// All items////////////////////////////
 
 const navItems = [
-  {
-    name: "Home",
-    promo: {
-      title: "Build with AI",
-      desc: "Power your Android apps with the latest Gemini APIs.",
-      cta: "Get Started",
-      imgSrc: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=764&auto=format&fit=crop"
-    },
-    columns: [
-      {
-        title: "Get Started",
-        links: [
-          { text: "A", href: "/docs/hello-world" },
-          { text: "B", href: "/courses" },
-          { text: "C", href: "/tutorials" }
-        ]
-      },
-      {
-        title: "By Device",
-        links: [
-          { text: "D", href: "/docs/device/adaptive" },
-          { text: "E", href: "/docs/device/xr" },
-          { text: "F", href: "/docs/device/wear-os" },
-          { text: "G", href: "/docs/device/chromeos" }
+  // {
+  //   name: "Home",
+  //   promo: {
+  //     title: "Build with AI",
+  //     desc: "Power your Android apps with the latest Gemini APIs.",
+  //     cta: "Get Started",
+  //     imgSrc: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=764&auto=format&fit=crop"
+  //   },
+  //   columns: [
+  //     {
+  //       title: "Get Started",
+  //       links: [
+  //         { text: "A", href: "/docs/hello-world" },
+  //         { text: "B", href: "/courses" },
+  //         { text: "C", href: "/tutorials" }
+  //       ]
+  //     },
+  //     {
+  //       title: "By Device",
+  //       links: [
+  //         { text: "D", href: "/docs/device/adaptive" },
+  //         { text: "E", href: "/docs/device/xr" },
+  //         { text: "F", href: "/docs/device/wear-os" },
+  //         { text: "G", href: "/docs/device/chromeos" }
 
-        ]
-      }
-    ]
-  },
+  //       ]
+  //     }
+  //   ]
+  // },
 
   {
     name: "Features",
@@ -95,35 +97,35 @@ const navItems = [
       },
     ]
   },
-  {
-    name: "Contact",
-    promo: {
-      title: "Excellent Experiences",
-      desc: "Create beautiful, user-centric designs for every user.",
-      cta: "Learn More",
-      imgSrc: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=764&auto=format&fit=crop"
-    },
-    columns: [
-      {
-        title: "UI Design",
-        links: [
-          { text: "Design for Android", href: "/design/android" },
-          { text: "Mobile", href: "/design/mobile" },
-          { text: "Adaptive UI", href: "/design/adaptive" },
-          { text: "Widgets", href: "/design/widgets" }
-        ]
-      },
-      {
-        title: "Architecture",
-        links: [
-          { text: "Introduction", href: "/architecture/intro" },
-          { text: "Libraries", href: "/architecture/libraries" },
-          { text: "Navigation", href: "/architecture/navigation" },
-          { text: "Testing", href: "/architecture/testing" }
-        ]
-      },
-    ]
-  }
+  // {
+  //   name: "Contact",
+  //   promo: {
+  //     title: "Excellent Experiences",
+  //     desc: "Create beautiful, user-centric designs for every user.",
+  //     cta: "Learn More",
+  //     imgSrc: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=764&auto=format&fit=crop"
+  //   },
+  //   columns: [
+  //     {
+  //       title: "UI Design",
+  //       links: [
+  //         { text: "Design for Android", href: "/design/android" },
+  //         { text: "Mobile", href: "/design/mobile" },
+  //         { text: "Adaptive UI", href: "/design/adaptive" },
+  //         { text: "Widgets", href: "/design/widgets" }
+  //       ]
+  //     },
+  //     {
+  //       title: "Architecture",
+  //       links: [
+  //         { text: "Introduction", href: "/architecture/intro" },
+  //         { text: "Libraries", href: "/architecture/libraries" },
+  //         { text: "Navigation", href: "/architecture/navigation" },
+  //         { text: "Testing", href: "/architecture/testing" }
+  //       ]
+  //     },
+  //   ]
+  // }
 ];
 ////////////////////////////////////////////////////////////////////
 
@@ -133,7 +135,12 @@ const navItems = [
 
 
 /////////////////// Theme Section/////////////////////////////////////
-const Navbar = () => {
+export default function Navbar() {
+
+  const { data: session, status } = useSession();
+  console.log(session)
+
+
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
@@ -183,7 +190,6 @@ const Navbar = () => {
 
 
 
-
   return (
     <div
       className={`fixed top-0 flex z-50 w-full transition-transform duration-300 py-8 px-22 bg-base-300/80 backdrop-blur-sm shadow-md ${showNavbar ? "translate-y-0" : "-translate-y-full"
@@ -199,7 +205,11 @@ const Navbar = () => {
 
       </div>
       <div>
-        <ul className="ml-4 hidden lg:flex">
+        <ul className="ml-4 gap-2 hidden lg:flex">
+          <Link href="/"><div role="button" className="btn btn-ghost text-base-content/70">
+            Home
+          </div></Link>
+
           {navItems.map((item) => (
             <li key={item.name}>
               <div className="dropdown dropdown-hover">
@@ -247,24 +257,25 @@ const Navbar = () => {
               </div>
             </li>
           ))}
-          <li><Link href="/community" className="btn btn-ghost text-base-content/70">Extra</Link></li>
+          <div role="button" className="btn btn-ghost text-base-content/70">
+            Contact
+          </div>
+          <li>
+            <Link href="/My_Bookings" className="btn btn-ghost text-base-content/70">My Appointments</Link>
+          </li>
         </ul>
       </div>
 
 
-
-
-
-
       <div className="navbar-end gap-2">
         <div className='justify-center items-center flex'>
-          <div className="dropdown dropdown-hover dropdown-center">
+          {/* <div className="dropdown dropdown-hover dropdown-center">
             <div tabIndex={0} className=""><GrLanguage className='w-5 h-5' /></div>
             <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-20 p-2 shadow-sm">
               <li><a>English</a></li>
               <li><a>বাংলা</a></li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         <label className="swap swap-rotate btn btn-ghost btn-circle">
@@ -273,23 +284,161 @@ const Navbar = () => {
           <svg className="swap-off h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41l-.71.71a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" /></svg>
         </label>
 
-        <div className="hidden sm:flex gap-1">
-          
-          <div className="dropdown dropdown-center">
-            <div tabIndex={0} className=""><Link href="/login" className="btn btn-ghost">Log In</Link></div>
-            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-20 p-2 shadow-sm">
-              <Link className='pb-4' href={"/login"}><button className="btn btn-sm btn-soft btn-info text-black">Doctor</button></Link>
-              <Link href={"/login"}><button className="btn btn-sm btn-soft btn-info text-black">Patient</button></Link>
-              
-            </ul>
-          </div>
+        <div className="hidden sm:flex gap-5">
 
-          <Link href="/register" className="btn text-[15px] font-bold rounded-4xl px-8 bg-gradient-to-br from-green-300 to-blue-600 hover:bg-gradient-to-bl">Get Started</Link>
+          {status === "authenticated" ? (
+            <>
+              <div className="dropdown dropdown-center">
+                <div tabIndex={0} role="button">
+                  <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center text-white font-bold text-lg">
+                    {session?.user?.image ? (
+                      <Image
+                        src={session.user.image}
+                        width={40}
+                        height={40}
+                        alt="User image"
+                        className="rounded-full object-cover"
+                      />
+                    ) : (
+                      <span>
+                        {session?.user?.name
+                          ? session.user.name.charAt(0).toUpperCase()
+                          : "U"}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {session?.user?.role === "doctor" ? (
+                  <div>
+                    <ul
+                      tabIndex="-1"
+                      className="dropdown-content menu mt-2 bg-base-100 rounded-box z-1 w-40 p-2 shadow-sm"
+                    >
+                      <Link href={"/profile/doctor_profile"}>
+                        <li className="mb-3">
+                          <button className="btn">Doctor Profile</button>
+                        </li>
+                      </Link>
+                      <li>
+                        <button className="btn" onClick={() => signOut()}>
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+
+                  <div>
+                    <ul
+                      tabIndex="-1"
+                      className="dropdown-content menu mt-2 bg-base-100 rounded-box z-1 w-40 p-2 shadow-sm"
+                    >
+                      <Link href={"/profile/patient_profile"}>
+                        <li className="mb-3">
+                          <button className="btn">Patient Profile</button>
+                        </li>
+                      </Link>
+                      <li>
+                        <button className="btn" onClick={() => signOut()}>
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+
+              <div className="dropdown dropdown-center">
+                <div tabIndex={0}>
+                  <Link href="/login" className="btn rounded-4xl btn-ghost">
+                    Log In
+                  </Link>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-20 p-2 shadow-sm"
+                >
+                  <Link href={"/Login/doctor"} className="pb-4">
+                    <button className="btn btn-sm btn-soft btn-info text-black">
+                      Doctor
+                    </button>
+                  </Link>
+                  <Link href={"/Login/patient"}>
+                    <button className="btn btn-sm btn-soft btn-info text-black">
+                      Patient
+                    </button>
+                  </Link>
+                </ul>
+              </div>
+            </>
+          )}
+
+
+
+
+          {/* {status == "authenticated" ? (<>
+
+            <div className="dropdown dropdown-center">
+              <div tabIndex={0} role="button">
+                <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center text-white font-bold text-lg">
+                  {session?.user?.image ? (
+                    <Image
+                      src={session.user.image}
+                      width={40}
+                      height={40}
+                      alt="User image"
+                      className="rounded-full object-cover"
+                    />
+                  ) : (
+                    <span>
+                      {session?.user?.name
+                        ? session.user.name.charAt(0).toUpperCase()
+                        : "U"}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div>
+                
+
+              </div>
+              <div>
+                <ul tabIndex="-1" className="dropdown-content menu mt-2 bg-base-100 rounded-box z-1 w-40 p-2 shadow-sm">
+                  <Link href={"/profile/patient_profile"}><li className='mb-3'><button className='btn'>View Profile</button></li></Link>
+                  <li><button className='btn' onClick={() => signOut()}>Logout</button></li>
+                </ul>
+                
+              </div>
+              <div>
+                <ul tabIndex="-1" className="dropdown-content menu mt-2 bg-base-100 rounded-box z-1 w-40 p-2 shadow-sm">
+                  <Link href={"/profile/patient_profile"}><li className='mb-3'><button className='btn'>View Profile</button></li></Link>
+                  <li><button className='btn' onClick={() => signOut()}>Logout</button></li>
+                </ul>
+                
+              </div>
+            </div>
+
+
+          </>) : (<><div className="dropdown dropdown-center">
+
+            <div tabIndex={0} className=""><Link href="/login" className="btn rounded-4xl btn-ghost">Log In</Link></div>
+            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-20 p-2 shadow-sm">
+              <Link className='pb-4' href={"/Login/doctor "}><button className="btn btn-sm btn-soft btn-info text-black">Doctor</button></Link>
+              <Link href={"/Login/patient"}><button className="btn btn-sm btn-soft btn-info text-black">Patient</button></Link>
+
+            </ul>
+          </div></>)} */}
+
+
+
+          <Link href="/all_doctors" className="btn text-[15px] font-bold rounded-4xl px-8 bg-gradient-to-br from-green-300 to-blue-600 hover:bg-gradient-to-bl">Get Started</Link>
         </div>
       </div>
 
     </div>
   );
 };
-
-export default Navbar;

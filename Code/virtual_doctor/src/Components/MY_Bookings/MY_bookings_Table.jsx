@@ -1,0 +1,62 @@
+import DeleteBooking from "@/app/My_Bookings/Components/DeleteBooking";
+import Image from "next/image";
+import Link from "next/link";
+import { FaRegEdit } from "react-icons/fa";
+
+
+const MY_bookings_Table = ({ data }) => {
+  return (
+    <div className="my-8">
+      <h1 className="text-center font-bold text-3xl my-4">My All Bookings</h1>
+      <div className="w-11/12 mx-auto overflow-x-auto">
+        <table className="w-full table table-zebra">
+          <thead className="border">
+            <tr>
+              <th>Doctor Image</th>
+              <th>Doctor Name</th>
+              <th>Appoinment Date</th>
+              <th>Appoinment Price</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th> </th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((item) => {
+              return (
+                <tr key={item._id} className="border">
+                  <td>
+                    <Image
+                      src={item.service_img}
+                      alt={item.service_name}
+                      width={50}
+                      height={50}
+                    />
+                  </td>
+                  <td>{item.service_name}{item.service_firstName}</td>
+                  <td>{item.date}</td>
+                  <td>{item.service_price}</td>
+                  <td>{item.phone}</td>
+                  <td>{item.address}</td>
+                  <td>
+                    <Link href={`/My_Bookings/${item._id}`}>
+                      <FaRegEdit className="h-8 w-8 font-bold" />
+                    </Link>
+                
+                  </td>
+
+                  <td>
+                    <DeleteBooking id={item._id}></DeleteBooking>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default MY_bookings_Table;

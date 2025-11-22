@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 const features = [
   {
@@ -94,30 +94,107 @@ const features = [
 ];
 
 export default function ServiceCard({ items = features }) {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(null);
+
+  const openModal = (item) => {
+    setActive(item);
+    setOpen(true);
+  };
+
+  const closeModal = () => {
+    setOpen(false);
+    setActive(null);
+  };
+
+  const handleKeyDown = (e, item) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openModal(item);
+    }
+  };
+
   return (
-    <section className="py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {items.map((f, idx) => (
-            <article
-              key={idx}
-              className="card bg-emerald-50 border border-emerald-100 rounded-xl shadow-sm p-5 hover:shadow-lg transition-shadow duration-200"
-            >
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white/60 border border-emerald-100">
-                  <div className="text-emerald-700">{f.icon}</div>
+    <>
+      <section className="py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {items.map((f, idx) => (
+              <article
+                key={idx}
+                className="card bg-emerald-50 border border-emerald-100 rounded-xl shadow-sm p-5 hover:shadow-lg transition-shadow duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-300"
+                role="button"
+                tabIndex={0}
+                onClick={() => openModal(f)}
+                onKeyDown={(e) => handleKeyDown(e, f)}
+                aria-haspopup="dialog"
+                aria-controls="feature-modal"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white/60 border border-emerald-100">
+                    <div className="text-emerald-700">{f.icon}</div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-sm font-semibold text-emerald-900">
+                      {f.title}
+                    </h3>
+                    <p className="mt-1 text-xs text-emerald-700">{f.desc}</p>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-sm font-semibold text-emerald-900">
-                    {f.title}
-                  </h3>
-                  <p className="mt-1 text-xs text-emerald-700">{f.desc}</p>
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
+      </section>
+
+
+      <div
+        id="feature-modal"
+        className={`modal ${open ? "modal-open" : ""}`}
+        aria-hidden={!open}
+        role="dialog"
+        aria-modal="true"
+      >
+
+        <div className="modal-box max-w-lg">
+          <div className="flex items-start gap-4">
+            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-emerald-50 border border-emerald-100">
+              <div className="text-emerald-700">{active?.icon}</div>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-emerald-900">
+                {active?.title}
+              </h3>
+              <p className="py-2 text-sm text-emerald-700">{active?.desc}</p>
+            </div>
+          </div>
+
+          <div className="mt-3 text-sm text-gray-600">
+            <p>
+              {active ? `More details about "${active.title}" can go here.` : null}
+            </p>
+          </div>
+
+          <div className="modal-action">
+            <button className="btn btn-ghost rounded-4xl" onClick={closeModal}>
+              Close
+            </button>
+            {/* <button
+              className="btn btn-emerald"
+              onClick={() => {
+                closeModal();
+              }}
+            >
+              Take Action
+            </button> */}
+          </div>
+        </div>
+        <div
+          className="modal-backdrop"
+          onClick={closeModal}
+          aria-hidden="true"
+        />
       </div>
-    </section>
+    </>
   );
 }

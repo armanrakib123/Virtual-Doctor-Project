@@ -67,7 +67,7 @@ export default function MultiDirectionHero({
 
 
                             </div>
-                            <div><button className="btn rounded-4xl px-8 py-3 bg-cyan-800 text-white font-bold">Sign Up Free</button></div>
+                            {/* <div><button className="btn rounded-4xl px-8 py-3 bg-cyan-800 text-white font-bold">Sign Up Free</button></div> */}
 
                         </div>
                     </div>

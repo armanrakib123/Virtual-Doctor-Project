@@ -3,7 +3,11 @@ const uri = process.env.MONGODB_URI
 
 export const collectionNameObj = {
     All_Doctor_Collection:"All_Doctor",
-    userCollection:"VD_UserAuth"
+    userCollection:"VD_UserAuth",
+    VD_Doctor_Auth:"VD_Doctor_Auth",
+    VD_Patient_Auth:"VD_Patient_Auth",
+    VD_Appointment_Booking:"VD_Appointment_Booking",
+    Patient_Profile:"Patient_Profile",
 }
 
 export default function dbconnect(collectionName) {
@@ -16,4 +20,3 @@ export default function dbconnect(collectionName) {
     });
     return client.db(process.env.DB_NAME).collection(collectionName)
 }
-

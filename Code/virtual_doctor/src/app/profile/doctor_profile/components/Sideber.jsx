@@ -10,6 +10,8 @@ import {
   FaMoneyBillWave,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const navItems = [
   { href: "/profile/doctor_profile/", label: "Dashboard", icon: <FaTachometerAlt /> },
@@ -21,6 +23,11 @@ const navItems = [
 ];
 
 export default function Sidebar() {
+  const { data: session, status } = useSession();
+  console.log(session)
+
+
+
   const pathname = usePathname() || "/";
 
   const isActive = (href) => {
@@ -34,27 +41,43 @@ export default function Sidebar() {
       : "flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-200";
 
   return (
-    <aside className="w-64 bg-cyan-300 shadow-md flex flex-col min-h-screen">
+    <aside className="w-64 bg-cyan-200 shadow-md flex flex-col min-h-screen">
 
 
 
-{/*////////////////////// Profile Section /////////////////////////////*/}
+      {/*////////////////////// Profile Section /////////////////////////////*/}
 
 
       <div className="p-6 text-center border-b">
-        <div className="avatar online mb-2 flex justify-center">
-          <div className="w-20 h-20 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden">
-            <img src="/Assets/Doc.jpg" alt="Doctor_Image" width={60}
-              height={60}
-              className="object-cover" />
+
+
+        <div className="flex justify-center">
+          <div className="w-28 h-28 rounded-full bg-gradient-to-br from-teal-400 to-sky-400 flex items-center justify-center text-white text-3xl font-bold shadow-md">
+            {session?.user?.image ? (
+              <Image
+                src={session.user.image}
+                width={120}
+                height={120}
+                alt="User image"
+                className="rounded-full object-cover"
+              />
+            ) : (
+              <span>
+                {session?.user?.name
+                  ? session.user.name.charAt(0).toUpperCase()
+                  : "U"}
+              </span>
+
+            )}
           </div>
         </div>
-        <h2 className="text-xl font-semibold">Dr. Arman Rakib</h2>
+
+        <h2 className="text-xl font-semibold">Dr. {session?.user?.name}</h2>
         <p className="text-sm text-gray-500">Cardiologist</p>
       </div>
 
 
-{/*/////////////////////// Navigation Menu //////////////////////////*/}
+      {/*/////////////////////// Navigation Menu //////////////////////////*/}
 
 
       <nav className="flex-1 overflow-y-auto">
@@ -76,7 +99,7 @@ export default function Sidebar() {
 
 
 
-{/*///////////////////////////////////// Logout Button //////////////////////*/}
+      {/*///////////////////////////////////// Logout Button //////////////////////*/}
 
 
 

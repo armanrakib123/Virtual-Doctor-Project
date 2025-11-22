@@ -1,6 +1,7 @@
 
 import dbconnect, { collectionNameObj } from "@/lib/dbconnect";
 import bcrypt from "bcrypt";
+import toast from "react-hot-toast";
 
 export async function POST(req) {
     try {
@@ -16,14 +17,15 @@ export async function POST(req) {
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            return new Response(JSON.stringify({ error: "Invalid email format" }), {
+            return new Response(JSON.stringify(toast.error("Invalid email format")), {
                 status: 400,
             });
+            
         }
 
         const user = await userCollection.findOne({ email });
         if (user) {
-            return new Response(JSON.stringify({ error: "User already exists" }), {
+            return new Response(JSON.stringify(toast.dismiss("User already exists")), {
                 status: 400,
             });
         }
