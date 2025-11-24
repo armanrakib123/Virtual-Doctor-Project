@@ -256,7 +256,7 @@ export default function Page() {
                         top: "50%",
                         transform: "translateY(-50%)",
                         cursor: "pointer",
-                        fontSize: "18px"
+                        fontSize: "18px",
                       }}
                     >
                       {showPassword ? "🙈" : "👁️"}

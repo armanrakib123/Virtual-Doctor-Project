@@ -8,7 +8,6 @@ import Image from 'next/image'
 export default function ProfileHome() {
 
   const { data: session, status } = useSession();
-  console.log(session)
 
 
   return (

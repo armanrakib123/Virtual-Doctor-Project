@@ -58,12 +58,12 @@ export default function EPrescriptionsSection() {
   };
 
   return (
-    <div className="bg-gray-200 rounded-2xl pd-4 px-50">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">E-Prescriptions</h2>
+    <div className="">
+      <div className="flex  justify-center items-center mb-4">
+        
         <button
           onClick={() => setShowModal(true)}
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
+          className="bg-green-500 rounded-4xl text-2xl pd-4 px-50 py-3 font-bold  text-white hover:bg-green-700 transition"
         >
           Create Prescription
         </button>
