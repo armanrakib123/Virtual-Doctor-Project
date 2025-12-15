@@ -1,9 +1,7 @@
-
-
-
 "use client";
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const DEFAULT_FILTERS = {
   priceMin: 0,
@@ -96,7 +94,7 @@ export default function DoctorDirectory({ doctors }) {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6">
-        
+
         {/* =================== LEFT FILTER SIDEBAR =================== */}
         <aside className="col-span-12 lg:col-span-3 bg-white p-5 rounded-2xl shadow">
           <div className="flex justify-between mb-4">
@@ -180,11 +178,10 @@ export default function DoctorDirectory({ doctors }) {
               {[2, 3, 4, 5].map((r) => (
                 <button
                   key={r}
-                  className={`px-2 py-1 rounded border ${
-                    filters.ratingMin === r
+                  className={`px-2 py-1 rounded border ${filters.ratingMin === r
                       ? "bg-blue-100 border-blue-400"
                       : ""
-                  }`}
+                    }`}
                   onClick={() => update("ratingMin", r)}
                 >
                   {r}★+
@@ -240,10 +237,21 @@ export default function DoctorDirectory({ doctors }) {
                 className="bg-white p-4 rounded-xl shadow flex justify-between"
               >
                 <div className="flex gap-4">
-                  <img
-                    className="w-20 h-20 rounded object-cover border"
-                    src={doc.profilePicture}
-                  />
+                  {doc.profilePicture ? (
+                    <div className="w-20 h-20 rounded overflow-hidden border">
+                      <Image
+                        src={doc.profilePicture}
+                        alt={`${doc.firstName} ${doc.lastName}`}
+                        width={80}
+                        height={80}
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-20 h-20 rounded border bg-gray-100 flex items-center justify-center text-sm text-gray-500">
+                      No image
+                    </div>
+                  )}
                   <div>
                     <h2 className="font-semibold text-lg">
                       {doc.title} {doc.firstName} {doc.lastName}
@@ -291,9 +299,8 @@ export default function DoctorDirectory({ doctors }) {
               <button
                 key={i}
                 onClick={() => goToPage(i + 1)}
-                className={`px-3 py-1 border rounded ${
-                  page === i + 1 ? "bg-blue-500 text-white" : ""
-                }`}
+                className={`px-3 py-1 border rounded ${page === i + 1 ? "bg-blue-500 text-white" : ""
+                  }`}
               >
                 {i + 1}
               </button>

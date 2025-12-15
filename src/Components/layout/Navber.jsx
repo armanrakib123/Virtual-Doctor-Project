@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { GrLanguage } from "react-icons/gr";
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 
@@ -260,9 +259,9 @@ export default function Navbar() {
           <div role="button" className="btn btn-ghost text-base-content/70">
             Contact
           </div>
-          <li>
+          {/* <li>
             <Link href="/My_Bookings" className="btn btn-ghost text-base-content/70">My Appointments</Link>
-          </li>
+          </li> */}
         </ul>
       </div>
 
