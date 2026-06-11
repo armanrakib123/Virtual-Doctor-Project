@@ -1,7 +1,8 @@
 {
   "/page": "app/page.js",
   "/appointment/[docId]/page": "app/appointment/[docId]/page.js",
-  "/login/page": "app/login/page.js",
-  "/doctors/[specialty]/page": "app/doctors/[specialty]/page.js",
-  "/doctors/page": "app/doctors/page.js"
+  "/doctors/page": "app/doctors/page.js",
+  "/about/page": "app/about/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/login/page": "app/login/page.js"
 }
