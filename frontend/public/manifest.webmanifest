@@ -1,6 +1,6 @@
 {
-    "name": "MediBook",
-    "short_name": "MediBook",
+    "name": "VirtualDoc",
+    "short_name": "VirtualDoc",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",

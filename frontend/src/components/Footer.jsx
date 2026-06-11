@@ -13,7 +13,7 @@ const Footer = () => {
                 <div>
                     <img className='mb-5 w-40' src={assets.logo} alt="logo" />
                     <p className='w-full md:w-2/3 text-gray-600 leading-6'>
-                        MediBook is a doctor appointment booking platform that helps patients easily find doctors,
+                        VirtualDoc is a doctor appointment booking platform that helps patients easily find doctors,
                         book appointments, and manage healthcare schedules online. It also provides dedicated
                         dashboards for admins and doctors to manage appointments efficiently.
                     </p>
@@ -45,7 +45,7 @@ const Footer = () => {
             <div>
                 <hr />
                 <p className='py-5 text-sm text-center'>
-                    Copyright © 2026 <a href={import.meta.env.VITE_AUTHOR_CONTACT} className='underline' >Laxman</a> - All Right Reserved.
+                    Copyright © 2026 <a href={process.env.NEXT_PUBLIC_AUTHOR_CONTACT || '#'} className='underline' >Laxman</a> - All Right Reserved.
                 </p>
             </div>
         </div>

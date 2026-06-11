@@ -1,6 +1,6 @@
-# MediBook Client
+# VirtualDoc Client
 
-This is the front-end application for the MediBook Doctor Appointment Booking System, built using React and Vite. It provides a user-friendly interface for patients to browse doctors, book appointments, and manage their profiles.
+This is the front-end application for the VirtualDoc Doctor Appointment Booking System, built using React and Vite. It provides a user-friendly interface for patients to browse doctors, book appointments, and manage their profiles.
 
 ## 📂 Features
 
@@ -81,4 +81,4 @@ Contributions are welcome! Please read the [CONTRIBUTING.md](../CONTRIBUTING.md)
 
 ---
 
-**Part of the MediBook Doctor Appointment Booking System**
+**Part of the VirtualDoc Doctor Appointment Booking System**

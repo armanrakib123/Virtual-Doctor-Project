@@ -25,7 +25,7 @@ const Contact = () => {
                     </p>
 
                     {/* Career info */}
-                    <p className='font-semibold text-lg text-gray-600'>Careers at MEDIBOOK</p>
+                    <p className='font-semibold text-lg text-gray-600'>Careers at VirtualDoc</p>
                     <p className='text-gray-500'>Learn more about our teams and job openings.</p>
 
                     {/* Explore Jobs button */}

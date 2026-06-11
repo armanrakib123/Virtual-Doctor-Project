@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['logo.png'],
       manifest: {
-        name: 'MediBook - Doctor Appointment',
-        short_name: 'MediBook',
+        name: 'VirtualDoc - Doctor Appointment',
+        short_name: 'VirtualDoc',
         description: 'Book and manage doctor appointments easily',
         theme_color: '#0f766e',
         background_color: '#ffffff',

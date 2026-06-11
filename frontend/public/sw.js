@@ -1,4 +1,4 @@
-const CACHE_NAME = "medibook-cache-v1";
+const CACHE_NAME = "VirtualDoc-cache-v1";
 const OFFLINE_URL = "/offline.html";
 
 // Install → cache offline page

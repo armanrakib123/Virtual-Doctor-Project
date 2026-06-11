@@ -1,6 +1,7 @@
+"use client";
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 
 const RelatedDoctors = ({ docId, speciality }) => {
 
@@ -8,7 +9,7 @@ const RelatedDoctors = ({ docId, speciality }) => {
     const { doctors } = useContext(AppContext)
 
     // Hook to navigate between pages
-    const navigate = useNavigate()
+    const router = useRouter()
 
     // State to store related doctors list
     const [relDoc, setRelDocs] = useState([])
@@ -35,7 +36,7 @@ const RelatedDoctors = ({ docId, speciality }) => {
                     <div
                         key={index}
                         onClick={() => {
-                            navigate(`/appointment/${item._id}`)
+                            router.push(`/appointment/${item._id}`)
                             scrollTo(0, 0)
                         }}
                         className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500'

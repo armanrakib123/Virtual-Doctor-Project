@@ -49,7 +49,7 @@ const NotFound = () => {
 
                 {/* Extra hint */}
                 <p className="text-xs text-gray-400 mt-6">
-                    MediBook • Your trusted healthcare companion
+                    VirtualDoc • Your trusted healthcare companion
                 </p>
             </div>
         </div>

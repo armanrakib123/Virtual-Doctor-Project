@@ -1,12 +1,12 @@
-// Import React and required hooks/assets
+"use client";
 import React from 'react'
 import { assets } from '../assets/assets'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 
 // Banner component – displays promotional text and navigation button
 const Banner = () => {
 
-    const navigate = useNavigate()  // Used for page navigation
+    const router = useRouter()  // Used for page navigation
 
     return (
         // Main container with background color, padding, and rounded edges
@@ -22,7 +22,7 @@ const Banner = () => {
 
                 {/* Button to navigate to Login page */}
                 <button 
-                    onClick={() => { navigate('/login'); scrollTo(0, 0) }} 
+                    onClick={() => { router.push('/login'); scrollTo(0, 0) }} 
                     className='bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all'
                 >
                     Create account

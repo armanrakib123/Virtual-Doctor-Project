@@ -1,6 +1,7 @@
+"use client";
 import React from 'react'
 import { specialityData } from '../assets/assets'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 const SpecialityMenu = () => {
     return (
@@ -23,7 +24,7 @@ const SpecialityMenu = () => {
                     <Link
                         key={index}
                         onClick={() => { scrollTo(0, 0) }}
-                        to={`/doctors/${item.speciality}`}
+                        href={`/doctors/${item.speciality}`}
                         className='flex flex-col items-center text-xs cursor-pointer flex-shrink-0 hover:translate-y-[-10px] transition-all duration-500'
                     >
                         {/* Speciality Image */}

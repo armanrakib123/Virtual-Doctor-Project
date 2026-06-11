@@ -1,11 +1,12 @@
+"use client";
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { AppContext } from '../context/AppContext';
 import Loading from './Loading';
 
 const TopDoctors = () => {
 
-    const navigate = useNavigate(); // Used to programmatically navigate between routes
+    const router = useRouter(); // Used to programmatically navigate between routes
     const { doctors } = useContext(AppContext); // Access doctors data from global context
 
     return (
@@ -27,7 +28,7 @@ const TopDoctors = () => {
                             <div
                                 key={index}
                                 onClick={() => {
-                                    navigate(`/appointment/${item._id}`);
+                                    router.push(`/appointment/${item._id}`);
                                     scrollTo(0, 0);
                                 }}
                                 className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500'
@@ -62,7 +63,7 @@ const TopDoctors = () => {
                     {/* "More" Button to navigate to all doctors page */}
                     <button
                         onClick={() => {
-                            navigate('/doctors');
+                            router.push('/doctors');
                             scrollTo(0, 0);
                         }}
                         className='bg-blue-50 text-gray-600 px-12 py-3 rounded-full mt-10'
