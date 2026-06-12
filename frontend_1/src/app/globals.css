@@ -1,0 +1,92 @@
+@import "tailwindcss";
+@tailwind utilities;
+@plugin "daisyui" {}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --mainColor: #89216b;
+  --whiteColor: #ffffff;
+  --titleColor: #555555;
+  --labelColor: #333333;
+
+
+  --bg-1: #0a0a0a;
+  --bg-2: #1a1a2e;
+  --bg-3: #16213e;
+}
+
+
+
+
+/* ////////////////////////////////////////// */
+
+
+
+
+@layer components {
+  .loading-backdrop {
+    @apply fixed inset-0 flex items-center justify-center z-50;
+    background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+    animation: fadeIn 0.5s ease-out both;
+  }
+
+  .loading-logo {
+    @apply flex items-center justify-center rounded-full border-2;
+    width: 80px;
+    height: 80px;
+    font-weight: 700;
+    border-color: rgba(100, 255, 218, 0.9); /* teal-ish border */
+    box-shadow: 0 0 12px rgba(100, 255, 218, 0.45); /* glow */
+    animation: logoPop 1.5s ease-out both, pulseGlow 2s infinite ease-in-out;
+  }
+
+  .loading-progress-track {
+    @apply w-full h-1 rounded overflow-hidden bg-slate-800 relative;
+  }
+
+  .loading-progress-fill {
+    @apply h-full rounded;
+    background: linear-gradient(90deg, #64ffda, #4facfe);
+    box-shadow: 0 0 10px rgba(100,255,218,0.5);
+    transition: width 0.3s ease;
+  }
+
+  .floating-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: #64ffda;
+    animation: floating 3s ease-in-out infinite;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes logoPop {
+  0%   { transform: scale(0.85); opacity: 0; }
+  60%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulseGlow {
+  0%   { box-shadow: 0 0 6px rgba(100,255,218,0.25); }
+  50%  { box-shadow: 0 0 18px rgba(100,255,218,0.55); transform: translateY(-2px); }
+  100% { box-shadow: 0 0 6px rgba(100,255,218,0.25); transform: translateY(0); }
+}
+
+@keyframes floating {
+  0%   { transform: translateY(0); opacity: 0.9; }
+  50%  { transform: translateY(-6px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.9; }
+}
+
+
+
+/* /////////////////////////////////////////// */
