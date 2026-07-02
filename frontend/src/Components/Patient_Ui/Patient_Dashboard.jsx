@@ -1,7 +1,3 @@
-// File: pages/doctor-dashboard.jsx
-// Next.js page (Pages Router). Requires: Tailwind CSS and lucide-react installed.
-// Install: npm install lucide-react
-
 import React, { useState } from 'react'
 import {
   User,

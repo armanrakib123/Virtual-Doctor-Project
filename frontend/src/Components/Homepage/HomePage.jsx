@@ -4,10 +4,8 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import MultiDirectionHero from "./MultiDirectionHero";
-import ServiceCard from "./ServiceCard";
-import ManagementTeamSlide from "../ManagementTeam/ManagementTeamSlide";
 import { MultiDirectionSlide } from "./MultiDirectionSlide";
-
+import ServiceCard from "./ServiceCard";
 
 
 
@@ -98,12 +96,6 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-
-
-      <section>
-        <ManagementTeamSlide></ManagementTeamSlide>
-      </section>
-
     </div>
   );
 }
