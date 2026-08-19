@@ -11,7 +11,15 @@ const collectionNameObj = {
     VD_Patient_Auth: "VD_Patient_Auth",
     VD_Appointment_Booking: "VD_Appointment_Booking",
     Patient_Profile: "Patient_Profile",
-    Live_chat: "Live_chat"
+    Live_chat: "Live_chat",
+    VideoRooms: "VideoRooms",
+    CallHistory: "CallHistory",
+    Messages: "Messages",
+    ChatRooms: "ChatRooms",
+    Prescriptions: "Prescriptions",
+    MedicalFiles: "MedicalFiles",
+    Notifications: "Notifications",
+    CallParticipants: "CallParticipants"
 };
 
 const connectDB = async () => {

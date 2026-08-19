@@ -21,7 +21,7 @@ export const authOptions = {
       },
       async authorize(credentials) {
         try {
-          const res = await fetch("http://127.0.0.1:5000/api/auth/login-doctor", {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/login-doctor`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(credentials),
@@ -50,7 +50,7 @@ export const authOptions = {
       },
       async authorize(credentials) {
         try {
-          const res = await fetch("http://127.0.0.1:5000/api/auth/login-patient", {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/login-patient`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(credentials),
@@ -105,7 +105,7 @@ export const authOptions = {
       const role = roleCookie === "doctor" ? "doctor" : "patient";
 
       try {
-        await fetch("http://127.0.0.1:5000/api/auth/google", {
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/google`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

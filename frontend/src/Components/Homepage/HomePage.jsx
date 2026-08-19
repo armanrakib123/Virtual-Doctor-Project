@@ -6,6 +6,13 @@ import "aos/dist/aos.css";
 import MultiDirectionHero from "./MultiDirectionHero";
 import { MultiDirectionSlide } from "./MultiDirectionSlide";
 import ServiceCard from "./ServiceCard";
+import { FaHospital, FaUserMd, FaCalendarCheck, FaHeartbeat, FaAmbulance, FaLaptopMedical } from 'react-icons/fa';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { motion } from 'framer-motion';
+import Link from "next/link";
+import Review from "../layout/Review";
 
 
 
@@ -13,6 +20,114 @@ export default function HomePage() {
   useEffect(() => {
     AOS.init({ duration: 900, once: true, easing: "ease-out-cubic" });
   }, []);
+
+
+
+
+
+
+
+  const features = [
+    { icon: FaHospital, title: 'State-of-the-art Facilities', description: 'Experience healthcare in our modern, well-equipped facilities.' },
+    { icon: FaUserMd, title: 'Expert Medical Staff', description: 'Our team of experienced doctors and nurses provide top-notch care.' },
+    { icon: FaCalendarCheck, title: 'Easy Appointments', description: 'Book and manage your appointments with just a few clicks.' },
+    { icon: FaHeartbeat, title: "Comprehensive Care", description: "From preventive care to complex treatments, we've got you covered." },
+    { icon: FaAmbulance, title: '24/7 Emergency Services', description: 'Round-the-clock emergency care for your peace of mind.' },
+    { icon: FaLaptopMedical, title: 'Telemedicine', description: 'Get expert medical advice from the comfort of your home.' },
+  ];
+  const testimonials = [
+    {
+      name: "John Doe",
+      text: "Health Nest has revolutionized how I manage my healthcare. It's so easy to use!",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
+    },
+    {
+      name: "Jane Smith",
+      text: "I love how I can access all my medical information in one place. Great job, Health Nest!",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
+    },
+    {
+      name: "Mike Johnson",
+      text: "Booking appointments has never been easier. Health Nest is a game-changer!",
+      image: "https://randomuser.me/api/portraits/men/22.jpg",
+    },
+    {
+      name: "Emily Davis",
+      text: "The staff is incredibly helpful and caring. I highly recommend Health Nest!",
+      image: "https://randomuser.me/api/portraits/women/25.jpg",
+    },
+    {
+      name: "James Wilson",
+      text: "The platform is user-friendly and has made my life so much easier!",
+      image: "https://randomuser.me/api/portraits/men/15.jpg",
+    },
+    {
+      name: "Mary Brown",
+      text: "I appreciate the convenience of managing everything online. Thank you, Health Nest!",
+      image: "https://randomuser.me/api/portraits/women/13.jpg",
+    },
+  ];
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
+  };
+
+  const images = [
+    {
+      src: "https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      alt: "Modern Hospital",
+    },
+
+    {
+      src: "https://i.ytimg.com/vi/XCxz9yyEkmg/maxresdefault.jpg",
+      alt: "Patient Care",
+    },
+    {
+      src: "https://5.imimg.com/data5/SELLER/Default/2021/10/YI/WX/NZ/30422219/hospitality-interior-design-service-1000x1000.jpg",
+      alt: "Patient Care",
+    },
+  ];
+
+
+
+
+
+
+
+
+
 
   return (
     <div className="min-h-screen text-base-content">
@@ -34,68 +149,143 @@ export default function HomePage() {
           />
         </div>
 
-        <div>
-          <ServiceCard></ServiceCard>
-        </div>
-
       </section>
 
-      <main className="max-w-8xl mx-auto px-12 py-8">
-        <section id="home" className="grid md:grid-cols-2 gap-12 items-center">
-          <div data-aos="fade-right">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">Doctors Who Listen</h1>
-            <p className="mt-4 w-2/3 text-lg text-muted-foreground">Our doctors spend time to get to know you and your health. They treat you with the respect and empathy you deserve and have years of local and international experience to give you advice you can rely on.</p>
 
-          </div>
 
-          <div data-aos="fade-left" className="relative">
-            <div className="rounded-xl overflow-hidden shadow-xl">
-              <img src="/Assets/Why.webp" alt="hero" className="w-full h-[500px] object-cover" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div className="container mx-auto px-3">
+        <div className="bg-light min-h-screen">
+          <section className="features py-12 sm:py-20">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-base-700">
+                Our Features
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                {features.map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    className="bg-base-200 p-6 rounded-3xl shadow-lg text-center feature-card"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.01 }}
+                    whileHover={{ y: -10 }}
+                  >
+                    <feature.icon className="text-4xl sm:text-5xl text-sky-300 mb-4 mx-auto" />
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2 text-base-600">
+                      {feature.title}
+                    </h3>
+                    <p className="text-base-800 text-sm sm:text-base">
+                      {feature.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
+          </section>
 
-          </div>
-        </section>
-
-      </main>
-
-      <section id="features" className=" max-w-8xl mx-auto px-12 py-8 bg-gray-200">
-
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-
-
-          <div>
-            <div data-aos="fade-left">
-              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">Diagnosis You Can Trust</h1>
-              <p className="mt-4 w-2/3 text-lg text-muted-foreground">You can depend on the quality of our diagnosis and test results. Our laboratories are set up according to international standards and protocols and Praava's diagnostic lab is one of six internationally accredited labs in Bangladesh.</p>
-
+          <section className="about-us bg-base-100 py-20">
+            <div className="container mx-auto px-4 flex flex-col md:flex-row items-stretch"> { }
+              <div className="md:w-1/2 mb-8 md:mb-0"> { }
+                <Slider {...{ ...sliderSettings, arrows: false }}> { }
+                  {images.map((image, index) => (
+                    <div key={index} className="rounded-3xl shadow-lg overflow-hidden">
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-100 object-cover"
+                        style={{ height: '400px', width: '100%', objectFit: 'cover' }}
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+              <div className="md:w-1/2 md:pl-8 flex flex-col justify-between"> { }
+                <h2 className="text-3xl font-bold text-center mb-8 text-base-700">
+                  About Health Nest
+                </h2>
+                <div className="flex-grow"> { }
+                  <p className="text-base-700 mb-4 text-[1.1rem] font-montserrat">
+                    Health Nest is a cutting-edge healthcare management system
+                    designed to streamline medical processes and enhance patient
+                    care. Our platform integrates advanced technology with medical
+                    expertise to provide a seamless experience for both healthcare
+                    providers and patients.
+                  </p>
+                  <p className="text-base-700 mb-4 text-[1.1rem] font-montserrat">
+                    With Health Nest, you can easily manage appointments, access
+                    medical records, and communicate with your healthcare team.
+                    We're committed to improving healthcare accessibility and
+                    efficiency, ensuring that you receive the best possible care.
+                  </p>
+                </div>
+                <Link href={`/`}>
+                  <motion.button
+                    className="bg-accent text-base-700 font-bold py-2 px-6 rounded-full hover:bg-base-700 hover:text-base-700 transition duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Learn More
+                  </motion.button>
+                </Link>
+              </div>
             </div>
-            <div className="pt-8">
-              <h2 className="btn text-white font-bold bg-cyan-800 w-40 flex justify-center items-center h-12" data-aos="fade-up">Our Services</h2>
+          </section>
 
+
+
+          <section className="testimonials bg-base-100 py-20">
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl font-bold text-center mb-12 text-base-800">
+                What Our Patients Say
+              </h2>
+              <Slider {...settings}>
+                {testimonials.map((testimonial, index) => (
+                  <motion.div
+                    key={index}
+                    className="bg-base-300 p-6 rounded-xl h-55 w-250 mx-2 cursor-pointer transition-all ease-out hover:font-semibold"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.00, backgroundColor: "rgb(255 203 116)" }}
+                  >
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-16 h-16 rounded-full mx-auto mb-4"
+                    />
+                    <p className="text-base-600 mb-4 text-center text-sm">
+                      "{testimonial.text}"
+                    </p>
+                    <p className="text-base-700 font-semibold text-center">
+                      - {testimonial.name}
+                    </p>
+                  </motion.div>
+                ))}
+              </Slider>
             </div>
-          </div>
-
-          <div data-aos="fade-right">
-            <img src="/Assets/Lab.webp" alt="Lab_test" className="rounded-xl shadow-lg w-full h-[500px] object-cover" />
-          </div>
-
+          </section>
+          {/* <Review /> */}
         </div>
-      </section>
 
-      <main className="max-w-8xl mx-auto px-12 py-8">
-        <section id="home" className="grid md:grid-cols-2 gap-12 items-center">
-          <div data-aos="fade-right">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">Healthcare Anytime, </h1>
-            <p className="mt-4 w-2/3 text-lg text-muted-foreground">We use technology to make healthcare accessible to you no matter where you are. You can access your health data, book appointments, review your prescriptions, and view your medical records, anywhere at your convenience.</p>
-          </div>
+      </div>
 
-          <div data-aos="fade-left" className="relative">
-            <div className="rounded-xl overflow-hidden shadow-xl">
-              <img src="/Assets/Care.webp" alt="hero" className="w-full h-[500px] object-cover" />
-            </div>
-          </div>
-        </section>
-      </main>
     </div>
   );
 }

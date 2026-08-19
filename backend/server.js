@@ -1,12 +1,12 @@
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
+
 const http = require("http");
 const cors = require("cors");
-const dotenv = require("dotenv");
 const { Server } = require("socket.io");
 const { connectDB } = require("./config/db");
 const apiRoutes = require("./routes/index");
-
-dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
@@ -31,20 +31,58 @@ app.use("/api", apiRoutes);
 io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);
 
-  socket.on("join-room", (roomId) => {
+  socket.on("join-room", ({ roomId, userId, role }) => {
     socket.join(roomId);
-    console.log(`User ${socket.id} joined room ${roomId}`);
+    socket.to(roomId).emit("user-joined", { userId, role, socketId: socket.id });
+    console.log(`User ${userId} (${role}) joined room ${roomId}`);
+  });
+
+  socket.on("incoming-call", (data) => {
+    socket.to(data.roomId).emit("incoming-call", data);
+  });
+
+  socket.on("accept-call", (data) => {
+    socket.to(data.roomId).emit("accept-call", data);
+  });
+
+  socket.on("reject-call", (data) => {
+    socket.to(data.roomId).emit("reject-call", data);
+  });
+
+  socket.on("offer", (data) => {
+    socket.to(data.roomId).emit("offer", data);
+  });
+
+  socket.on("answer", (data) => {
+    socket.to(data.roomId).emit("answer", data);
+  });
+
+  socket.on("ice-candidate", (data) => {
+    socket.to(data.roomId).emit("ice-candidate", data);
+  });
+
+  socket.on("toggle-camera", (data) => {
+    socket.to(data.roomId).emit("toggle-camera", data);
+  });
+
+  socket.on("toggle-mic", (data) => {
+    socket.to(data.roomId).emit("toggle-mic", data);
+  });
+
+  socket.on("start-screen-share", (data) => {
+    socket.to(data.roomId).emit("start-screen-share", data);
+  });
+
+  socket.on("stop-screen-share", (data) => {
+    socket.to(data.roomId).emit("stop-screen-share", data);
   });
 
   socket.on("send-message", (data) => {
-    const { roomId, message, senderId, senderRole } = data;
-    io.to(roomId).emit("receive-message", {
-      roomId,
-      message,
-      senderId,
-      senderRole,
-      createdAt: new Date(),
-    });
+    io.to(data.roomId).emit("receive-message", { ...data, createdAt: new Date() });
+  });
+
+  socket.on("end-call", (data) => {
+    socket.to(data.roomId).emit("end-call", data);
   });
 
   socket.on("disconnect", () => {

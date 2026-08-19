@@ -3,7 +3,7 @@ import DoctorDirectory from './Components/All_Doctor';
 export default async function All_Doctor() {
   let data = [];
   try {
-    const res = await fetch("http://127.0.0.1:5000/api/doctor", { cache: "no-store" });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/doctor`, { cache: "no-store" });
     if (res.ok) {
       data = await res.json();
     }
@@ -13,7 +13,7 @@ export default async function All_Doctor() {
 
   data = data.map(d => ({
     ...d,
-    _id: d._id.toString(),
+    _id: d._id ? d._id.toString() : (d.id ? d.id.toString() : Math.random().toString()),
     Consultation_Fee: Number(d.Consultation_Fee) || 0,
     yearsOfExperience: Number(d.yearsOfExperience) || 0,
     ratings: Number(d.ratings) || 0,

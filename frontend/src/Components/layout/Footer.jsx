@@ -34,7 +34,7 @@ export default function Footer() {
         </nav>
       </footer>
 
-      <footer className="footer flex justify-center py-3  border-t font-bold bg-gray-300 text-base-content border-base-300">
+      <footer className="footer flex justify-center py-3  border-t font-bold bg-base-400 text-base-content border-base-300">
         <aside>
           <p>Copyright © {new Date().getFullYear()} - All right reserved by ACME Industries Ltd</p>
         </aside>
