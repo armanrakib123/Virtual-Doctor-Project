@@ -4,9 +4,12 @@ dotenv.config();
 
 const http = require("http");
 const cors = require("cors");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 const { Server } = require("socket.io");
 const { connectDB } = require("./config/db");
 const apiRoutes = require("./routes/index");
+const logger = require("./utils/logger");
 
 const app = express();
 const server = http.createServer(app);
@@ -18,8 +21,23 @@ const io = new Server(server, {
 });
 
 // Middleware
+app.use(helmet());
+
+const limiter = rateLimit({
+  windowMs: process.env.RATE_LIMIT_WINDOW_MS ? parseInt(process.env.RATE_LIMIT_WINDOW_MS) : 15 * 60 * 1000,
+  max: process.env.RATE_LIMIT_MAX_REQUESTS ? parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) : 100, 
+  message: "Too many requests from this IP, please try again later."
+});
+app.use("/api", limiter);
+
 app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:3000", credentials: true }));
 app.use(express.json());
+
+// Request logging middleware
+app.use((req, res, next) => {
+  logger.info(`${req.method} ${req.url}`);
+  next();
+});
 
 // Connect to Database
 connectDB();
@@ -29,12 +47,12 @@ app.use("/api", apiRoutes);
 
 // Socket.io integration
 io.on("connection", (socket) => {
-  console.log("A user connected:", socket.id);
+  logger.info(`A user connected: ${socket.id}`);
 
   socket.on("join-room", ({ roomId, userId, role }) => {
     socket.join(roomId);
     socket.to(roomId).emit("user-joined", { userId, role, socketId: socket.id });
-    console.log(`User ${userId} (${role}) joined room ${roomId}`);
+    logger.info(`User ${userId} (${role}) joined room ${roomId}`);
   });
 
   socket.on("incoming-call", (data) => {
@@ -86,11 +104,11 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
+    logger.info(`User disconnected: ${socket.id}`);
   });
 });
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  logger.info(`Server is running on port ${PORT}`);
 });

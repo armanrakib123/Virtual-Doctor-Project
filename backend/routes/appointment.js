@@ -22,10 +22,18 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const bookingCollection = dbconnect(collectionNameObj.VD_Appointment_Booking);
-    const result = await bookingCollection.insertOne(req.body);
-    res.json({ result });
+    const { doctorId, date, timeSlot, email } = req.body;
+    
+    // Application-level validation for double booking
+    const existingBooking = await bookingCollection.findOne({ doctorId, date, timeSlot });
+    if (existingBooking) {
+        return res.status(409).json({ success: false, message: "This time slot is already booked." });
+    }
+
+    const result = await bookingCollection.insertOne({ ...req.body, status: 'Pending', createdAt: new Date() });
+    res.json({ success: true, result, message: "Appointment booked successfully" });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 

@@ -1,0 +1,49 @@
+// Utility context for shared app-level functions and constants
+import { createContext } from "react";
+
+export const AppContext = createContext();
+
+const AppContextProvider = (props) => {
+
+    const currency = '$';
+    const months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    // Format slot date as "DD Mon YYYY"
+    const slotDateFormat = (slotDate) => {
+        const dateArray = slotDate.split('-');
+        return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`;
+    };
+
+    // Calculate age from DOB safely
+const calculateAge = (dob) => {
+    // Handle missing or invalid DOB
+    if (!dob) return '--';
+
+    const birthDate = new Date(dob);
+    if (isNaN(birthDate.getTime())) return '--';
+
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    const dayDiff = today.getDate() - birthDate.getDate();
+
+    // Adjust if birthday hasn’t occurred yet this year
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        age--;
+    }
+    
+    return age;
+};
+
+
+    const value = { calculateAge, slotDateFormat, currency };
+
+    return (
+        <AppContext.Provider value={value}>
+            {props.children}
+        </AppContext.Provider>
+    );
+};
+
+export default AppContextProvider;

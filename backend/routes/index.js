@@ -12,5 +12,8 @@ router.use("/Appointment_Update", require("./appointment"));
 
 router.use("/room", require("./room"));
 router.use("/chat", require("./chat"));
+router.use("/admin", require("./admin"));
+router.use("/prescription", require("./prescription"));
+router.use("/payment", require("./payment"));
 
 module.exports = router;
