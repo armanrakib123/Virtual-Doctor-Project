@@ -1,5 +1,6 @@
 import DoctorDirectory from './Components/All_Doctor';
 
+export const dynamic = 'force-dynamic';
 export default async function All_Doctor() {
   let data = [];
   try {

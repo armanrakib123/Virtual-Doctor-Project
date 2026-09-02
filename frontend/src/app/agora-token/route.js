@@ -1,4 +1,4 @@
-import { RtcRole, RtcTokenBuilder } from "agora-access-token";
+import { RtcRole, RtcTokenBuilder } from "agora-token";
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
