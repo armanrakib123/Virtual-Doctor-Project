@@ -8,28 +8,84 @@ const ambulance = require("../models/Ambulance")
 const bcryptjs = require('bcryptjs');
 const cacheMiddleware = require('../middleware/cache.middleware');
 const cacheService = require('../services/cache.service');
+const jwt = require('jsonwebtoken');
+const authAdmin = require('../middleware/authAdmin');
+const upload = require('../middleware/multer');
+const cloudinary = require('cloudinary').v2;
+
+const loginAdmin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            const token = jwt.sign(email + password, process.env.JWT_ACCESS_SECRET);
+            res.json({ success: true, token });
+        } else {
+            res.json({ success: false, message: "Invalid credentials" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
 const add_doctor = async (req, res) => {
     try {
-        const { name, expertise, image,date,email,password,desc,contact,ammount} = req.body;
-        console.log(name, expertise, image,date,email,password,desc,contact,ammount);
-        if (!name | !image | !expertise | !date | !email | !password | !desc | !contact | !ammount) {
-            return res.status(204).json({ message: "incomplete content" });
-        } else {
-            const db_doctor = await doctor.findOne({ name,email });
-            if (!db_doctor) {
-                const hashed_password = await bcryptjs.hash(password, 8);
-                await doctor.create({ name, image, expertise, date, email, password:hashed_password, desc, contact ,ammount});
-                await cacheService.delPattern('cache:/api/admin/*'); // Clear admin cache
-                await cacheService.delPattern('cache:/api/doctor*'); // Clear public doctor cache
-                return res.status(200).json({ message: "doctor added" });
-            }
-            return res.status(409).json({ message: "doctor already exists" });
+        const { name, email, password, speciality, degree, experience, about, fees, address, expertise, image, date, desc, contact, ammount } = req.body;
+        const imageFile = req.file;
+
+        // Either use new Admin format or fallback to original format
+        const finalName = name;
+        const finalEmail = email;
+        const finalPassword = password;
+        
+        if (!finalName || !finalEmail || !finalPassword) {
+            return res.json({ success: false, message: "Missing Details" });
         }
 
-    } catch (e) {
-        return res.status(400).json({ message: e.message });
+        const db_doctor = await doctor.findOne({ email: finalEmail });
+        if (db_doctor) {
+            return res.json({ success: false, message: "doctor already exists" });
+        }
+
+        const hashed_password = await bcryptjs.hash(finalPassword, 8);
+
+        let imageUrl = image || '';
+        if (imageFile) {
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
+            imageUrl = imageUpload.secure_url;
+        }
+
+        const doctorData = {
+            name: finalName,
+            email: finalEmail,
+            image: imageUrl,
+            password: hashed_password,
+            speciality: speciality || expertise,
+            expertise: expertise || speciality,
+            degree: degree || '',
+            experience: experience || '',
+            about: about || desc,
+            desc: desc || about,
+            fees: fees || ammount,
+            ammount: ammount || fees,
+            address: address ? JSON.parse(address) : '',
+            contact: contact || '',
+            date: date || Date.now()
+        };
+
+        const newDoctor = new doctor(doctorData);
+        await newDoctor.save();
+        
+        await cacheService.delPattern('cache:/api/admin/*'); // Clear admin cache
+        await cacheService.delPattern('cache:/api/doctor*'); // Clear public doctor cache
+        
+        return res.json({ success: true, message: "Doctor Added" });
+
+    } catch (error) {
+        console.log(error);
+        return res.json({ success: false, message: error.message });
     }
-}
+};
 
 const delete_doctor = async (req, res) => {
     try {
@@ -101,23 +157,24 @@ const update_appointment = async (req, res) => {
 
 
 const all_appointments = async (req, res) => {
-    
-  
     try {
+        const appointmentsList = await appointments.find().populate("user").populate("doctor");
+        
+        const mappedAppointments = appointmentsList.map(app => {
+            const appObj = app.toObject();
+            return {
+                ...appObj,
+                userData: appObj.user || { name: 'Unknown', image: '', dob: '2000-01-01' },
+                docData: appObj.doctor || { name: 'Unknown', image: '' },
+                slotDate: appObj.date || '',
+                slotTime: appObj.timeSlot || '',
+                amount: appObj.amount || (appObj.doctor && appObj.doctor.fees) || 0
+            }
+        });
 
-        const all_appointments = await appointments.find().populate("user").populate("doctor");
-        console.log(all_appointments)
-        if (!all_appointments) {
-            return res
-                .status(401)
-                .json({ message: "no appointments found" });
-        } else {
-            return res.json({ all_appointments });
-        }
-
-
+        res.json({ success: true, appointments: mappedAppointments });
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 
@@ -181,39 +238,51 @@ const cancel_appointment = async (req, res) => {
 
 const admin_dashboard = async (req, res) => {
     try {
-        const doctorsCount = await doctor.countDocuments();
-        const appointmentsCount = await appointments.countDocuments();
-        const patientsCount = await mongoose.connection.db.collection('users').countDocuments({ role: 'Patient' });
-        
-        const latestAppointments = await appointments.find({}).sort({ date: -1 }).limit(5).populate('doctor').populate('user');
-        
+
+        const doctors = await doctorModel.find({})
+        const users = await userModel.find({})
+        const appointmentsList = await appointments.find({}).populate("doctor")
+
+        const mappedLatest = appointmentsList.reverse().slice(0, 5).map(app => {
+            const appObj = app.toObject();
+            return {
+                ...appObj,
+                docData: appObj.doctor || { name: 'Unknown', image: '' },
+                slotDate: appObj.date || '',
+                slotTime: appObj.timeSlot || ''
+            };
+        });
+
         const dashData = {
-            doctors: doctorsCount,
-            appointments: appointmentsCount,
-            patients: patientsCount,
-            latestAppointments
-        };
-        
-        res.json({ success: true, dashData });
+            doctors: doctors.length,
+            appointments: appointmentsList.length,
+            patients: users.length,
+            latestAppointments: mappedLatest
+        }
+
+        res.json({ success: true, dashData })
+
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+        console.log(error)
+        res.json({ success: false, message: error.message })
     }
 };
 
 
 // Routes
-router.post("/add-doctor", add_doctor);
-router.delete("/delete-doctor/:id", delete_doctor);
-router.get("/appointments", cacheMiddleware('cache'), all_appointments);
-router.put("/update-appointment", update_appointment);
-router.get("/user-query", cacheMiddleware('cache'), user_query);
-router.get("/ambulance-service", cacheMiddleware('cache', 86400), ambulance_service);
-router.get("/appointments/:id", cacheMiddleware('cache'), single_appointments);
+router.post("/login", loginAdmin);
+router.post("/add-doctor", authAdmin, upload.single('image'), add_doctor);
+router.delete("/delete-doctor/:id", authAdmin, delete_doctor);
+router.get("/appointments", authAdmin, cacheMiddleware('cache'), all_appointments);
+router.put("/update-appointment", authAdmin, update_appointment);
+router.get("/user-query", authAdmin, cacheMiddleware('cache'), user_query);
+router.get("/ambulance-service", authAdmin, cacheMiddleware('cache', 86400), ambulance_service);
+router.get("/appointments/:id", authAdmin, cacheMiddleware('cache'), single_appointments);
 
 // Endpoints required by the Vite React Admin Dashboard
-router.post("/all-doctors", all_doctors); // React calls it as POST in context
-router.post("/change-availability", change_availability);
-router.post("/cancel-appointment", cancel_appointment);
-router.get("/dashboard", cacheMiddleware('cache', 60), admin_dashboard);
+router.post("/all-doctors", authAdmin, all_doctors); // React calls it as POST in context
+router.post("/change-availability", authAdmin, change_availability);
+router.post("/cancel-appointment", authAdmin, cancel_appointment);
+router.get("/dashboard", authAdmin, cacheMiddleware('cache', 60), admin_dashboard);
 
 module.exports = router;

@@ -1,8 +1,10 @@
+'use client';
 import axios from 'axios'
-import React, { useContext, useState } from 'react'
-import { DoctorContext } from '../context/DoctorContext'
-import { AdminContext } from '../context/AdminContext'
+import React, { useContext, useState, useEffect } from 'react'
+import { DoctorContext } from '../../admin_context/DoctorContext'
+import { AdminContext } from '../../admin_context/AdminContext'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
 
@@ -11,32 +13,52 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const backendUrl = import.meta.env.BACKEND_URL
+  const backendUrl = process.env.NEXT_PUBLIC_BASE_URL
 
-  const { setDToken } = useContext(DoctorContext)
-  const { setAToken } = useContext(AdminContext)
+  const { setDToken, dToken } = useContext(DoctorContext)
+  const { setAToken, aToken } = useContext(AdminContext)
+  
+  const router = useRouter()
+
+  useEffect(() => {
+    if (aToken) {
+        router.push('/admin/dashboard')
+    } else if (dToken) {
+        router.push('/admin/doctor-dashboard')
+    }
+  }, [aToken, dToken, router])
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
     if (state === 'Admin') {
 
-      const { data } = await axios.post(backendUrl + '/api/admin/login', { email, password })
-      if (data.success) {
-        setAToken(data.token)
-        localStorage.setItem('aToken', data.token)
-      } else {
-        toast.error(data.message)
+      try {
+        const { data } = await axios.post(backendUrl + '/api/admin/login', { email, password })
+        if (data.success) {
+          setAToken(data.token)
+          localStorage.setItem('aToken', data.token)
+          router.push('/admin/dashboard')
+        } else {
+          toast.error(data.message)
+        }
+      } catch(err) {
+        toast.error(err.message)
       }
 
     } else {
 
-      const { data } = await axios.post(backendUrl + '/api/doctor/login', { email, password })
-      if (data.success) {
-        setDToken(data.token)
-        localStorage.setItem('dToken', data.token)
-      } else {
-        toast.error(data.message)
+      try {
+        const { data } = await axios.post(backendUrl + '/api/doctor/login', { email, password })
+        if (data.success) {
+          setDToken(data.token)
+          localStorage.setItem('dToken', data.token)
+          router.push('/admin/doctor-dashboard')
+        } else {
+          toast.error(data.message)
+        }
+      } catch(err) {
+        toast.error(err.message)
       }
 
     }
@@ -67,3 +89,4 @@ const Login = () => {
 }
 
 export default Login
+

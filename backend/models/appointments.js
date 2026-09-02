@@ -8,6 +8,6 @@ const appointmentSchema = new mongoose.Schema({
     status: { type: String, default: 'Pending' }, // Pending, Confirmed, Cancelled, Completed
     invoice: { type: String },
     cancelled: { type: Boolean, default: false }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'Appointments' });
 
 module.exports = mongoose.model('Appointment', appointmentSchema);

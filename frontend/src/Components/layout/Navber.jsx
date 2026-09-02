@@ -5,69 +5,7 @@ import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { FaBars, FaHome, FaPhoneAlt, FaUserMd } from "react-icons/fa";
-const navItems = [
-
-
-  {
-    name: "Features",
-    promo: {
-      title: "Excellent Experiences",
-      desc: "Create beautiful, user-centric designs for every user.",
-      cta: "Learn More",
-      imgSrc: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=764&auto=format&fit=crop"
-    },
-    columns: [
-      {
-        title: "UI Design",
-        links: [
-          { text: "Design for Android", href: "/design/android" },
-          { text: "Mobile", href: "/design/mobile" },
-          { text: "Adaptive UI", href: "/design/adaptive" },
-          { text: "Widgets", href: "/design/widgets" }
-        ]
-      },
-      {
-        title: "Architecture",
-        links: [
-          { text: "Introduction", href: "/architecture/intro" },
-          { text: "Libraries", href: "/architecture/libraries" },
-          { text: "Navigation", href: "/architecture/navigation" },
-          { text: "Testing", href: "/architecture/testing" }
-        ]
-      },
-    ]
-  },
-  {
-    name: "About",
-    promo: {
-      title: "Excellent Experiences",
-      desc: "Create beautiful, user-centric designs for every user.",
-      cta: "Learn More",
-      imgSrc: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=764&auto=format&fit=crop"
-    },
-    columns: [
-      {
-        title: "UI Design",
-        links: [
-          { text: "Design for Android", href: "/design/android" },
-          { text: "Mobile", href: "/design/mobile" },
-          { text: "Adaptive UI", href: "/design/adaptive" },
-          { text: "Widgets", href: "/design/widgets" }
-        ]
-      },
-      {
-        title: "Architecture",
-        links: [
-          { text: "Introduction", href: "/architecture/intro" },
-          { text: "Libraries", href: "/architecture/libraries" },
-          { text: "Navigation", href: "/architecture/navigation" },
-          { text: "Testing", href: "/architecture/testing" }
-        ]
-      },
-    ]
-  },
-
-];
+const navItems = [{ name: "Services", promo: { title: "Better Healthcare Experience", desc: "Connect with trusted doctors and healthcare professionals online.", cta: "Find a Doctor", href: "/all_doctors", imgSrc: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1000&auto=format&fit=crop", }, columns: [{ title: "Healthcare Services", links: [{ text: "Find Doctors", href: "/all_doctors", }, { text: "Online Consultation", href: "/consultation", }, { text: "Book Appointment", href: "/appointments", }, { text: "Medical Specialists", href: "/specialists", },], }, { title: "Patient Services", links: [{ text: "My Appointments", href: "/My_Bookings", }, { text: "Medical Records", href: "/medical-records", }, { text: "Health Support", href: "/support", }, { text: "Emergency Help", href: "/emergency", },], },], }, { name: "Resources", promo: { title: "Your Health Matters", desc: "Explore helpful healthcare resources and expert information.", cta: "Explore Resources", href: "/blog", imgSrc: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop", }, columns: [{ title: "Learn", links: [{ text: "Health Blog", href: "/blog", }, { text: "Health Tips", href: "/health-tips", }, { text: "Medical Information", href: "/resources", }, { text: "FAQ", href: "/faq", },], }, { title: "Company", links: [{ text: "About VirtualDoc", href: "/about", }, { text: "Contact Us", href: "/contact", }, { text: "Help Center", href: "/help", }, { text: "Privacy Policy", href: "/privacy-policy", },], },], },];
 
 export default function Navbar() {
 
@@ -315,18 +253,6 @@ export default function Navbar() {
           </ul>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
       <div className="navbar-end gap-2">
 
         <div className='hidden lg:block'>
@@ -338,6 +264,17 @@ export default function Navbar() {
         </div>
 
         <div className="hidden sm:flex gap-5">
+
+
+
+
+
+
+
+
+
+
+
 
           <div className='hidden lg:block'>
             {status === "authenticated" ? (
@@ -431,6 +368,19 @@ export default function Navbar() {
               </>
             )}
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           <button
             onClick={() => setDrawerOpen(true)}

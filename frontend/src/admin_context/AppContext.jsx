@@ -1,3 +1,4 @@
+'use client';
 import { createContext } from "react";
 
 
@@ -5,8 +6,8 @@ export const AppContext = createContext()
 
 const AppContextProvider = (props) => {
 
-    const currency = import.meta.env.VITE_CURRENCY
-    const backendUrl = import.meta.env.BACKEND_URL
+    const currency = "$"
+    const backendUrl = process.env.NEXT_PUBLIC_BASE_URL
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -40,3 +41,4 @@ const AppContextProvider = (props) => {
 }
 
 export default AppContextProvider
+

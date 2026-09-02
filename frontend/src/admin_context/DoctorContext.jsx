@@ -1,3 +1,4 @@
+'use client';
 import { createContext, useState } from "react";
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -7,9 +8,9 @@ export const DoctorContext = createContext()
 
 const DoctorContextProvider = (props) => {
 
-    const backendUrl = import.meta.env.BACKEND_URL
+    const backendUrl = process.env.NEXT_PUBLIC_BASE_URL
 
-    const [dToken, setDToken] = useState(localStorage.getItem('dToken') ? localStorage.getItem('dToken') : '')
+    const [dToken, setDToken] = useState((typeof window !== 'undefined' ? localStorage.getItem('dToken') : '') ? (typeof window !== 'undefined' ? localStorage.getItem('dToken') : '') : '')
     const [appointments, setAppointments] = useState([])
     const [dashData, setDashData] = useState(false)
     const [profileData, setProfileData] = useState(false)

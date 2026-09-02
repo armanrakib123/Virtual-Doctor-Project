@@ -24,7 +24,7 @@ const collectionNameObj = {
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(uri);
+        await mongoose.connect(uri, { dbName: process.env.DB_NAME });
         console.log("MongoDB Connected via Mongoose");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
