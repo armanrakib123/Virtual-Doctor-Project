@@ -278,68 +278,250 @@ export default function Navbar() {
 
           <div className='hidden lg:block'>
             {status === "authenticated" ? (
-              <>
-                <div className="dropdown dropdown-start">
-                  <div tabIndex={0} role="button">
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center text-white font-bold text-lg">
+              <div className="dropdown dropdown-end">
+                {/* Profile Trigger */}
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="flex items-center gap-3 rounded-full border border-base-300 bg-base-100 px-2 py-1.5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-cyan-400 cursor-pointer"
+                >
+                  {/* User Image */}
+                  <div className="avatar">
+                    <div className="w-10 h-10 rounded-full ring ring-cyan-500 ring-offset-base-100 ring-offset-2">
                       {session?.user?.image ? (
                         <Image
                           src={session.user.image}
                           width={40}
                           height={40}
-                          alt="User image"
+                          alt={session?.user?.name || "User"}
                           className="rounded-full object-cover"
                         />
                       ) : (
-                        <span>
+                        <div className="w-full h-full rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg">
                           {session?.user?.name
                             ? session.user.name.charAt(0).toUpperCase()
                             : "U"}
-                        </span>
+                        </div>
                       )}
                     </div>
                   </div>
 
-                  {session?.user?.role === "doctor" ? (
-                    <div>
-                      <ul
-                        tabIndex="-1"
-                        className="dropdown-content menu mt-2 bg-base-100 rounded-box z-1 w-40 p-2 shadow-sm"
-                      >
-                        <Link href={"/profile/doctor_profile"}>
-                          <li className="mb-3">
-                            <button className="btn">Doctor Profile</button>
-                          </li>
-                        </Link>
-                        <li>
-                          <button className="btn" onClick={() => signOut()}>
-                            Logout
-                          </button>
-                        </li>
-                      </ul>
+                  {/* User Information */}
+                  <div className="hidden xl:block text-left leading-tight">
+                    <p className="max-w-[130px] truncate text-sm font-bold text-base-content">
+                      {session?.user?.name || "VirtualDoc User"}
+                    </p>
+
+                    <p className="text-xs font-medium text-cyan-600 capitalize">
+                      {session?.user?.role === "doctor"
+                        ? "Healthcare Professional"
+                        : "Patient Account"}
+                    </p>
+                  </div>
+
+                  {/* Dropdown Arrow */}
+                  <svg
+                    className="hidden sm:block w-4 h-4 text-base-content/60"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+
+                {/* Dropdown Menu */}
+                <div
+                  tabIndex={0}
+                  className="dropdown-content z-[100] mt-4 w-72 rounded-2xl border border-base-300 bg-base-100 p-3 shadow-2xl"
+                >
+                  {/* User Header */}
+                  <div className="rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 p-4 text-white">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur flex items-center justify-center font-bold text-xl overflow-hidden">
+                        {session?.user?.image ? (
+                          <Image
+                            src={session.user.image}
+                            width={48}
+                            height={48}
+                            alt="User"
+                            className="w-full h-full object-cover rounded-full"
+                          />
+                        ) : (
+                          <span>
+                            {session?.user?.name
+                              ? session.user.name.charAt(0).toUpperCase()
+                              : "U"}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="min-w-0">
+                        <h3 className="font-bold truncate">
+                          {session?.user?.name || "VirtualDoc User"}
+                        </h3>
+
+                        <p className="text-xs text-white/80 truncate">
+                          {session?.user?.email}
+                        </p>
+                      </div>
                     </div>
-                  ) : (
+
+                    <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-semibold">
+                      <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+
+                      {session?.user?.role === "doctor"
+                        ? "Doctor Account"
+                        : "Patient Account"}
+                    </div>
+                  </div>
+
+                  {/* Menu Items */}
+                  <div className="mt-3 space-y-1">
+
+                    {/* Profile */}
+                    <Link
+                      href={
+                        session?.user?.role === "doctor"
+                          ? "/profile/doctor_profile"
+                          : "/profile/patient_profile"
+                      }
+                      className="flex items-center gap-3 rounded-xl px-4 py-3 font-medium transition-all hover:bg-cyan-50 hover:text-cyan-700"
+                    >
+                      {/* Profile Icon */}
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5.121 17.804A7 7 0 0112 15c2.5 0 4.7 1.3 5.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+
+                      <div>
+                        <p className="text-sm font-semibold">
+                          My Profile
+                        </p>
+
+                        <p className="text-xs text-base-content/50">
+                          Manage your account
+                        </p>
+                      </div>
+                    </Link>
+
+                    {/* My Appointments - Patient Only */}
+                    {session?.user?.role !== "doctor" && (
+                      <Link
+                        href="/My_Bookings"
+                        className="flex items-center gap-3 rounded-xl px-4 py-3 font-medium transition-all hover:bg-cyan-50 hover:text-cyan-700"
+                      >
+                        {/* Calendar Icon */}
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 7V3m8 4V3M5 11h14M5 5h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"
+                          />
+                        </svg>
+
+                        <div>
+                          <p className="text-sm font-semibold">
+                            My Appointments
+                          </p>
+
+                          <p className="text-xs text-base-content/50">
+                            View your consultations
+                          </p>
+                        </div>
+                      </Link>
+                    )}
+
+                    {/* Doctor Dashboard */}
+                    {session?.user?.role === "doctor" && (
+                      <Link
+                        href="/profile/doctor_profile"
+                        className="flex items-center gap-3 rounded-xl px-4 py-3 font-medium transition-all hover:bg-cyan-50 hover:text-cyan-700"
+                      >
+                        {/* Dashboard Icon */}
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm11 0h7v7h-7v-7z"
+                          />
+                        </svg>
+
+                        <div>
+                          <p className="text-sm font-semibold">
+                            Doctor Dashboard
+                          </p>
+
+                          <p className="text-xs text-base-content/50">
+                            Manage your practice
+                          </p>
+                        </div>
+                      </Link>
+                    )}
+                  </div>
+
+                  {/* Divider */}
+                  <div className="my-3 border-t border-base-300"></div>
+
+                  {/* Logout */}
+                  <button
+                    onClick={() => signOut()}
+                    className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left font-semibold text-red-500 transition-all hover:bg-red-50 hover:text-red-600"
+                  >
+                    {/* Logout Icon */}
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"
+                      />
+                    </svg>
 
                     <div>
-                      <ul
-                        tabIndex="-1"
-                        className="dropdown-content menu mt-2 bg-base-100 rounded-box z-1 w-40 p-2 shadow-sm"
-                      >
-                        <Link href={"/profile/patient_profile"}>
-                          <li className="mb-3">
-                            <button className="btn">Patient Profile</button>
-                          </li>
-                        </Link>
-                        <li>
-                          <button className="btn" onClick={() => signOut()}>
-                            Logout
-                          </button>
-                        </li>
-                      </ul>
+                      <p className="text-sm">
+                        Sign Out
+                      </p>
+
+                      <p className="text-xs font-normal text-base-content/50">
+                        Securely logout from VirtualDoc
+                      </p>
                     </div>
-                  )}
+                  </button>
                 </div>
-              </>
+              </div>
             ) : (
               <>
 
@@ -396,4 +578,3 @@ export default function Navbar() {
     </div>
   );
 };
-
