@@ -12,7 +12,6 @@ const navItems = [{ name: "Services", promo: { title: "Better Healthcare Experie
 export default function Navbar() {
 
   const { data: session, status } = useSession();
-  console.log(session)
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { theme, toggleTheme, setTheme } = useTheme();

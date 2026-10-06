@@ -6,25 +6,20 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint"
   },
   "dependencies": {
     "agora-rtc-sdk-ng": "^4.24.0",
     "agora-token": "^2.0.6",
     "aos": "^2.3.4",
     "axios": "^1.20.0",
-    "bcrypt": "^6.0.0",
-    "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.22",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.3",
     "lucide-react": "^0.553.0",
-    "mongodb": "^6.21.0",
-    "mongoose": "^9.6.2",
     "next": "^15.5.4",
     "next-auth": "^4.24.13",
-    "nodemailer": "^7.0.10",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hot-toast": "^2.6.0",
@@ -32,13 +27,11 @@
     "react-slick": "^0.31.0",
     "react-toastify": "^11.1.0",
     "slick-carousel": "^1.8.1",
-    "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "daisyui": "^5.1.24",
-    "nodemon": "^3.1.11",
     "tailwindcss": "^4",
     "tailwindcss-animate": "^1.0.7"
   }
