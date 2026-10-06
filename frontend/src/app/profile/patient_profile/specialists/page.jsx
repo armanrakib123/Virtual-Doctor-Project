@@ -6,16 +6,16 @@ export default function SpecialistsPage() {
 
   return (
     <div>
-      <h2 className="text-xl font-semibold text-indigo-700 mb-4">My Specialists</h2>
+      <h2 className="text-xl font-semibold text-cyan-600 mb-4">My Specialists</h2>
 
       <div className="grid gap-3">
         {doctors.map((d) => (
-          <div key={d.id} className="p-4 border rounded-xl bg-blue-50 flex justify-between">
+          <div key={d.id} className="p-4 border border-base-content/10 rounded-xl bg-base-100 flex justify-between shadow-sm">
             <div>
-              <div className="font-medium">{d.name}</div>
-              <div className="text-sm text-slate-500">{d.specialty}</div>
+              <div className="font-medium text-base-content">{d.name}</div>
+              <div className="text-sm text-base-content/60">{d.specialty}</div>
             </div>
-            <div className="text-yellow-500">
+            <div className="text-amber-400">
               {"★".repeat(d.rating)}{"☆".repeat(5 - d.rating)}
             </div>
           </div>

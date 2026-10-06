@@ -4,7 +4,7 @@ import Sidebar from './Sidebar'
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="min-h-screen bg-sky-50">
+    <div className="min-h-screen bg-base-200 transition-colors">
       <div className="flex">
         <aside className="w-72 hidden md:block">
           <Sidebar />

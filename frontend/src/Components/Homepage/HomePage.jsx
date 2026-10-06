@@ -140,15 +140,14 @@ export default function HomePage() {
         </main>
       </header>
 
-      <section className="bg-gray-100 pt-12 pb-12">
+      <section className="bg-base-200 pt-12 pb-12 transition-colors">
         <div>
           <MultiDirectionSlide
-            className="font-display text-center text-4xl font-bold -tracking-widest  text-black dark:text-black md:text-7xl md:leading-[5rem]"
+            className="font-display text-center text-4xl font-bold -tracking-widest text-slate-800 dark:text-slate-100 md:text-7xl md:leading-[5rem]"
             textLeft="Everything you need to consult online"
             textRight="From quick booking to AI triage and digital prescriptions—built for speed & safety."
           />
         </div>
-
       </section>
 
 
@@ -171,27 +170,27 @@ export default function HomePage() {
 
 
       <div className="container mx-auto px-3">
-        <div className="bg-light min-h-screen">
+        <div className="min-h-screen">
           <section className="features py-12 sm:py-20">
             <div className="container mx-auto px-4">
-              <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-base-700">
+              <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-base-content">
                 Our Features
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {features.map((feature, index) => (
                   <motion.div
                     key={index}
-                    className="bg-base-200 p-6 rounded-3xl shadow-lg text-center feature-card"
+                    className="bg-base-200 border border-base-content/10 p-6 rounded-3xl shadow-lg text-center feature-card"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.01 }}
                     whileHover={{ y: -10 }}
                   >
-                    <feature.icon className="text-4xl sm:text-5xl text-sky-300 mb-4 mx-auto" />
-                    <h3 className="text-lg sm:text-xl font-semibold mb-2 text-base-600">
+                    <feature.icon className="text-4xl sm:text-5xl text-cyan-500 mb-4 mx-auto" />
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2 text-base-content">
                       {feature.title}
                     </h3>
-                    <p className="text-base-800 text-sm sm:text-base">
+                    <p className="text-base-content/70 text-sm sm:text-base">
                       {feature.description}
                     </p>
                   </motion.div>
@@ -200,10 +199,10 @@ export default function HomePage() {
             </div>
           </section>
 
-          <section className="about-us bg-base-100 py-20">
-            <div className="container mx-auto px-4 flex flex-col md:flex-row items-stretch"> { }
-              <div className="md:w-1/2 mb-8 md:mb-0"> { }
-                <Slider {...{ ...sliderSettings, arrows: false }}> { }
+          <section className="about-us bg-base-100 py-20 rounded-3xl border border-base-content/10 my-8">
+            <div className="container mx-auto px-4 flex flex-col md:flex-row items-stretch">
+              <div className="md:w-1/2 mb-8 md:mb-0">
+                <Slider {...{ ...sliderSettings, arrows: false }}>
                   {images.map((image, index) => (
                     <div key={index} className="rounded-3xl shadow-lg overflow-hidden">
                       <img
@@ -216,28 +215,28 @@ export default function HomePage() {
                   ))}
                 </Slider>
               </div>
-              <div className="md:w-1/2 md:pl-8 flex flex-col justify-between"> { }
-                <h2 className="text-3xl font-bold text-center mb-8 text-base-700">
+              <div className="md:w-1/2 md:pl-8 flex flex-col justify-between">
+                <h2 className="text-3xl font-bold text-center md:text-left mb-8 text-base-content">
                   About Health Nest
                 </h2>
-                <div className="flex-grow"> { }
-                  <p className="text-base-700 mb-4 text-[1.1rem] font-montserrat">
+                <div className="flex-grow">
+                  <p className="text-base-content/80 mb-4 text-[1.1rem] font-montserrat leading-relaxed">
                     Health Nest is a cutting-edge healthcare management system
                     designed to streamline medical processes and enhance patient
                     care. Our platform integrates advanced technology with medical
                     expertise to provide a seamless experience for both healthcare
                     providers and patients.
                   </p>
-                  <p className="text-base-700 mb-4 text-[1.1rem] font-montserrat">
+                  <p className="text-base-content/80 mb-4 text-[1.1rem] font-montserrat leading-relaxed">
                     With Health Nest, you can easily manage appointments, access
                     medical records, and communicate with your healthcare team.
                     We're committed to improving healthcare accessibility and
                     efficiency, ensuring that you receive the best possible care.
                   </p>
                 </div>
-                <Link href={`/`}>
+                <Link href={`/all_doctors`}>
                   <motion.button
-                    className="bg-accent text-base-700 font-bold py-2 px-6 rounded-full hover:bg-base-700 hover:text-base-700 transition duration-300"
+                    className="btn btn-primary font-bold py-2 px-8 rounded-full shadow-lg"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -248,32 +247,30 @@ export default function HomePage() {
             </div>
           </section>
 
-
-
-          <section className="testimonials bg-base-100 py-20">
+          <section className="testimonials bg-base-100 py-20 rounded-3xl border border-base-content/10 my-8">
             <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-bold text-center mb-12 text-base-800">
+              <h2 className="text-3xl font-bold text-center mb-12 text-base-content">
                 What Our Patients Say
               </h2>
               <Slider {...settings}>
                 {testimonials.map((testimonial, index) => (
                   <motion.div
                     key={index}
-                    className="bg-base-300 p-6 rounded-xl h-55 w-250 mx-2 cursor-pointer transition-all ease-out hover:font-semibold"
+                    className="bg-base-200 border border-base-content/10 p-6 rounded-xl h-55 w-250 mx-2 cursor-pointer transition-all ease-out"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.00, backgroundColor: "rgb(255 203 116)" }}
+                    whileHover={{ scale: 1.02 }}
                   >
                     <img
                       src={testimonial.image}
                       alt={testimonial.name}
-                      className="w-16 h-16 rounded-full mx-auto mb-4"
+                      className="w-16 h-16 rounded-full mx-auto mb-4 border-2 border-cyan-500"
                     />
-                    <p className="text-base-600 mb-4 text-center text-sm">
+                    <p className="text-base-content/80 mb-4 text-center text-sm italic">
                       "{testimonial.text}"
                     </p>
-                    <p className="text-base-700 font-semibold text-center">
+                    <p className="text-base-content font-semibold text-center">
                       - {testimonial.name}
                     </p>
                   </motion.div>

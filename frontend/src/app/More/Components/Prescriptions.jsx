@@ -70,15 +70,15 @@ export default function EPrescriptionsSection() {
 
   
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-400 bg-opacity-40 z-50">
-          <div className="bg-white rounded-xl shadow-lg w-full max-w-lg p-6 relative">
-            <h3 className="text-lg font-semibold mb-4">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50 p-4">
+          <div className="bg-base-100 border border-base-content/10 text-base-content rounded-2xl shadow-2xl w-full max-w-lg p-6 relative">
+            <h3 className="text-xl font-bold mb-4 text-base-content">
               Create New Prescription
             </h3>
             <form onSubmit={handleGeneratePreview} className="space-y-3">
               
               <input
-                className="w-full border rounded p-2"
+                className="w-full border border-base-content/20 bg-base-200 text-base-content rounded-xl p-2.5 outline-none focus:border-primary"
                 placeholder="Patient Name"
                 value={prescription.patient}
                 onChange={(e) =>
@@ -91,7 +91,7 @@ export default function EPrescriptionsSection() {
               />
               <div className="grid grid-cols-2 gap-3">
                 <input
-                  className="w-full border rounded p-2"
+                  className="w-full border border-base-content/20 bg-base-200 text-base-content rounded-xl p-2.5 outline-none focus:border-primary"
                   placeholder="Age"
                   value={prescription.age}
                   onChange={(e) =>
@@ -102,7 +102,7 @@ export default function EPrescriptionsSection() {
                   }
                 />
                 <input
-                  className="w-full border rounded p-2"
+                  className="w-full border border-base-content/20 bg-base-200 text-base-content rounded-xl p-2.5 outline-none focus:border-primary"
                   placeholder="Gender"
                   value={prescription.gender}
                   onChange={(e) =>
@@ -114,7 +114,7 @@ export default function EPrescriptionsSection() {
                 />
               </div>
               <input
-                className="w-full border rounded p-2"
+                className="w-full border border-base-content/20 bg-base-200 text-base-content rounded-xl p-2.5 outline-none focus:border-primary"
                 placeholder="Diagnosis"
                 value={prescription.diagnosis}
                 onChange={(e) =>
@@ -125,7 +125,7 @@ export default function EPrescriptionsSection() {
                 }
               />
               <textarea
-                className="w-full border rounded p-2"
+                className="w-full border border-base-content/20 bg-base-200 text-base-content rounded-xl p-2.5 outline-none focus:border-primary"
                 rows="3"
                 placeholder="Medicines..."
                 value={prescription.medicines}
@@ -137,7 +137,7 @@ export default function EPrescriptionsSection() {
                 }
               />
               <textarea
-                className="w-full border rounded p-2"
+                className="w-full border border-base-content/20 bg-base-200 text-base-content rounded-xl p-2.5 outline-none focus:border-primary"
                 rows="2"
                 placeholder="Notes..."
                 value={prescription.notes}
@@ -152,13 +152,13 @@ export default function EPrescriptionsSection() {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                  className="btn btn-ghost"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  className="btn btn-primary"
                 >
                   Generate Preview
                 </button>

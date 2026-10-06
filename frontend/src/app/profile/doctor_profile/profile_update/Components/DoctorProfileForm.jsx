@@ -77,7 +77,7 @@ export default function DoctorProfileForm({ initialData = null, onSubmit }) {
   ];
 
   const professionalInput =
-    "mt-1 w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 shadow-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-300 transition-all";
+    "mt-1 w-full rounded-xl border border-base-content/20 bg-base-100 dark:bg-slate-800 text-base-content px-4 py-2.5 shadow-sm focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all";
 
   function setNested(key, value) {
     if (key.includes(".")) {
@@ -205,7 +205,7 @@ export default function DoctorProfileForm({ initialData = null, onSubmit }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <form
-          className="lg:col-span-2 bg-white rounded-2xl shadow-xl p-8 space-y-8"
+          className="lg:col-span-2 bg-base-100 border border-base-content/10 rounded-2xl shadow-xl p-8 space-y-8 text-base-content"
           onSubmit={handleSubmit}
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -541,7 +541,7 @@ export default function DoctorProfileForm({ initialData = null, onSubmit }) {
 
 
         <aside className="lg:col-span-1">
-          <div className="sticky top-10 bg-white p-6 shadow-xl rounded-2xl">
+          <div className="sticky top-10 bg-base-100 border border-base-content/10 p-6 shadow-xl rounded-2xl text-base-content">
             <div className="flex items-center gap-4">
               <div className="w-20 h-20 rounded-full overflow-hidden bg-gray-100 shadow-md">
                 {picturePreview ? (

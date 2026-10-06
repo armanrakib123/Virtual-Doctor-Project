@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { signIn } from "next-auth/react"
 import { useRouter, useSearchParams } from "next/navigation";
 import Social_Login_Register from "./Components/Social_Login_Register";
+import ThemeToggle from "@/Components/layout/ThemeToggle";
 
 export default function Page() {
 
@@ -101,11 +102,14 @@ export default function Page() {
 
         <div className="bg-gradient-to-r from-[#037aa5] to-[var(--mainColor)] font-normal min-h-screen  place-content-center overflow-hidden">
 
-          <div className="pl-16">
-            <Link href="/" className="flex gap-1 btn-ghost text-xl">
+          <div className="px-8 sm:px-16 pt-4 flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-1 btn-ghost text-xl text-white">
               <div className='w-12'><img src="/Assets/Stethoscope.png" alt="Stethoscope_icon" /></div>
-              <span className="font-bold text-3xl">Virtual<span className="text-cyan-500">Doc</span></span>
+              <span className="font-bold text-3xl text-white">Virtual<span className="text-cyan-300">Doc</span></span>
             </Link>
+            <div className="bg-white/10 dark:bg-black/20 backdrop-blur-md rounded-full p-1 border border-white/20">
+              <ThemeToggle />
+            </div>
           </div>
 
           <div className="flex justify-center">
@@ -200,8 +204,7 @@ export default function Page() {
 
 
                   <div>
-                    <div className="font-bold justify-center flex pt-5 text-gray-600 text-[15px]" >Or continue with
-
+                    <div className="font-bold justify-center flex pt-5 text-base-content/70 text-[15px]" >Or continue with
                     </div>
 
                     <Social_Login_Register></Social_Login_Register>
@@ -289,8 +292,7 @@ export default function Page() {
                   </button>
 
                   <div>
-                    <div className="font-bold justify-center flex pt-5 text-gray-600 text-[15px]" >Or continue with
-
+                    <div className="font-bold justify-center flex pt-5 text-base-content/70 text-[15px]" >Or continue with
                     </div>
                     <Social_Login_Register></Social_Login_Register>
                   </div>

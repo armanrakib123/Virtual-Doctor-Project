@@ -2,21 +2,159 @@
 @tailwind utilities;
 @plugin "daisyui" {}
 
-
-body {
-  font-family: 'Poppins', sans-serif;
-}
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
 
 :root {
   --mainColor: #89216b;
   --whiteColor: #ffffff;
-  --titleColor: #555555;
+  --titleColor: #333333;
   --labelColor: #333333;
-
 
   --bg-1: #0a0a0a;
   --bg-2: #1a1a2e;
   --bg-3: #16213e;
+}
+
+[data-theme="dark"], .dark {
+  --whiteColor: #1e293b;
+  --titleColor: #f8fafc;
+  --labelColor: #cbd5e1;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Global utility dark adaptations so all existing light components seamlessly turn dark */
+.dark .bg-white,
+[data-theme="dark"] .bg-white {
+  background-color: #1e293b !important;
+}
+
+.dark .bg-slate-50,
+[data-theme="dark"] .bg-slate-50,
+.dark .bg-gray-50,
+[data-theme="dark"] .bg-gray-50 {
+  background-color: #0f172a !important;
+}
+
+.dark .bg-gray-100,
+[data-theme="dark"] .bg-gray-100,
+.dark .bg-slate-100,
+[data-theme="dark"] .bg-slate-100 {
+  background-color: #1e293b !important;
+}
+
+.dark .bg-sky-50,
+[data-theme="dark"] .bg-sky-50,
+.dark .bg-cyan-50,
+[data-theme="dark"] .bg-cyan-50,
+.dark .bg-blue-50,
+[data-theme="dark"] .bg-blue-50 {
+  background-color: #111e38 !important;
+}
+
+.dark .bg-teal-50,
+[data-theme="dark"] .bg-teal-50,
+.dark .bg-emerald-50,
+[data-theme="dark"] .bg-emerald-50 {
+  background-color: #0d2826 !important;
+}
+
+.dark .bg-amber-50,
+[data-theme="dark"] .bg-amber-50 {
+  background-color: #292010 !important;
+}
+
+.dark .bg-indigo-50,
+[data-theme="dark"] .bg-indigo-50 {
+  background-color: #1e1b4b !important;
+}
+
+.dark .bg-rose-50,
+[data-theme="dark"] .bg-rose-50 {
+  background-color: #31131b !important;
+}
+
+.dark .bg-cyan-200,
+[data-theme="dark"] .bg-cyan-200 {
+  background-color: #0f172a !important;
+}
+
+.dark .border-slate-200,
+[data-theme="dark"] .border-slate-200,
+.dark .border-slate-100,
+[data-theme="dark"] .border-slate-100,
+.dark .border-gray-200,
+[data-theme="dark"] .border-gray-200,
+.dark .border-gray-100,
+[data-theme="dark"] .border-gray-100,
+.dark .border-gray-300,
+[data-theme="dark"] .border-gray-300 {
+  border-color: #334155 !important;
+}
+
+.dark .border-cyan-100,
+[data-theme="dark"] .border-cyan-100,
+.dark .border-emerald-100,
+[data-theme="dark"] .border-emerald-100 {
+  border-color: #1e3a5f !important;
+}
+
+.dark .text-slate-900,
+[data-theme="dark"] .text-slate-900,
+.dark .text-gray-900,
+[data-theme="dark"] .text-gray-900,
+.dark .text-gray-800,
+[data-theme="dark"] .text-gray-800,
+.dark .text-slate-800,
+[data-theme="dark"] .text-slate-800 {
+  color: #f1f5f9 !important;
+}
+
+.dark .text-slate-700,
+[data-theme="dark"] .text-slate-700,
+.dark .text-gray-700,
+[data-theme="dark"] .text-gray-700,
+.dark .text-slate-600,
+[data-theme="dark"] .text-slate-600,
+.dark .text-gray-600,
+[data-theme="dark"] .text-gray-600 {
+  color: #cbd5e1 !important;
+}
+
+.dark .text-slate-500,
+[data-theme="dark"] .text-slate-500,
+.dark .text-gray-500,
+[data-theme="dark"] .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+.dark .text-black,
+[data-theme="dark"] .text-black {
+  color: #f8fafc !important;
+}
+
+.dark .shadow-md,
+[data-theme="dark"] .shadow-md,
+.dark .shadow-lg,
+[data-theme="dark"] .shadow-lg,
+.dark .shadow-xl,
+[data-theme="dark"] .shadow-xl,
+.dark .shadow-2xl,
+[data-theme="dark"] .shadow-2xl {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Form inputs & selects in dark mode */
+.dark input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+.dark select,
+[data-theme="dark"] select,
+.dark textarea,
+[data-theme="dark"] textarea {
+  color-scheme: dark;
 }
 
 

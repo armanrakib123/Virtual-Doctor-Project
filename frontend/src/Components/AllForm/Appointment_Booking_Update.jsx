@@ -189,7 +189,7 @@ const Appointment_Booking_Update = ({ data }) => {
 
   return (
     <div className="my-10 px-3">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-10">
+      <div className="max-w-4xl mx-auto bg-base-100 border border-base-content/10 text-base-content rounded-2xl shadow-lg p-6 md:p-10">
         <h2 className="text-center text-2xl md:text-3xl font-bold mb-6 text-primary">
           Update Appointment
         </h2>
@@ -204,7 +204,7 @@ const Appointment_Booking_Update = ({ data }) => {
               <input
                 defaultValue={session?.user?.name}
                 readOnly
-                className="input input-bordered bg-gray-100"
+                className="input input-bordered bg-base-200 text-base-content"
               />
             </div>
 
@@ -214,7 +214,7 @@ const Appointment_Booking_Update = ({ data }) => {
               <input
                 defaultValue={session?.user?.email}
                 readOnly
-                className="input input-bordered bg-gray-100"
+                className="input input-bordered bg-base-200 text-base-content"
               />
             </div>
 
@@ -224,7 +224,7 @@ const Appointment_Booking_Update = ({ data }) => {
               <input
                 defaultValue={data?.service_price}
                 readOnly
-                className="input input-bordered bg-gray-100"
+                className="input input-bordered bg-base-200 text-base-content"
               />
             </div>
 

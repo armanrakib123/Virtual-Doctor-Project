@@ -27,7 +27,7 @@ function AdminLayoutInner({ children }) {
   }
 
   return dToken || aToken ? (
-    <div className='bg-[#F8F9FD] min-h-screen mt-40'>
+    <div className='bg-base-200 text-base-content min-h-screen mt-40 transition-colors'>
       <ToastContainer />
       <Navbar />
       <div className='flex items-start'>

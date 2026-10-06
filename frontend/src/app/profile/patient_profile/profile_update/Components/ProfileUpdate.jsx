@@ -153,7 +153,7 @@ export default function ProfileUpdate({ serviceData = {} }) {
     <div className="p-6 max-w-5xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Update Patient Profile</h1>
 
-      <form onSubmit={handlePatientProfile} className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-lg border">
+      <form onSubmit={handlePatientProfile} className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-base-100 border border-base-content/10 p-6 rounded-2xl shadow-lg text-base-content">
 
         <div>
           <label className="label"><User size={18} /> Full Name</label>
