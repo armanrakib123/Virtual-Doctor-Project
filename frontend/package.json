@@ -34,5 +34,13 @@
     "daisyui": "^5.1.24",
     "tailwindcss": "^4",
     "tailwindcss-animate": "^1.0.7"
+  },
+  "allowScripts": {
+    "@tailwindcss/oxide@4.1.13": true,
+    "@tailwindcss/oxide": true,
+    "core-js@3.46.0": true,
+    "core-js": true,
+    "sharp@0.34.4": true,
+    "sharp": true
   }
 }
